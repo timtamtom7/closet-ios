@@ -10,6 +10,8 @@ actor DatabaseService {
     // Tables
     private let clothingItems = Table("clothing_items")
     private let outfits = Table("outfits")
+    private let outfitVetoes = Table("outfit_vetoes")
+    private let outfitRatings = Table("outfit_ratings")
 
     // ClothingItem columns
     private let id = SQLite.Expression<String>("id")
@@ -28,6 +30,13 @@ actor DatabaseService {
     private let weather = SQLite.Expression<String>("weather")
     private let temperature = SQLite.Expression<Double?>("temperature")
     private let outfitName = SQLite.Expression<String>("outfit_name")
+
+    // Veto columns
+    private let outfitId = SQLite.Expression<String>("outfit_id")
+    private let vetoReason = SQLite.Expression<String>("veto_reason")
+
+    // Rating columns
+    private let score = SQLite.Expression<Int>("score")
 
     private init() {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -59,6 +68,20 @@ actor DatabaseService {
             t.column(mood)
             t.column(weather)
             t.column(temperature)
+            t.column(createdAt)
+        })
+
+        try db?.run(outfitVetoes.create(ifNotExists: true) { t in
+            t.column(id, primaryKey: true)
+            t.column(outfitId)
+            t.column(vetoReason)
+            t.column(createdAt)
+        })
+
+        try db?.run(outfitRatings.create(ifNotExists: true) { t in
+            t.column(id, primaryKey: true)
+            t.column(outfitId)
+            t.column(score)
             t.column(createdAt)
         })
     }
@@ -158,5 +181,71 @@ actor DatabaseService {
     func deleteOutfit(id outfitId: UUID) throws {
         let outfit = outfits.filter(id == outfitId.uuidString)
         try db?.run(outfit.delete())
+    }
+
+    // MARK: - OutfitVeto CRUD
+
+    func insertVeto(_ veto: OutfitVeto) throws {
+        try db?.run(outfitVetoes.insert(
+            id <- veto.id.uuidString,
+            outfitId <- veto.outfitId.uuidString,
+            vetoReason <- veto.reason.rawValue,
+            createdAt <- veto.createdAt.timeIntervalSince1970
+        ))
+    }
+
+    func fetchAllVetoes() throws -> [OutfitVeto] {
+        guard let db = db else { return [] }
+        var results: [OutfitVeto] = []
+        for row in try db.prepare(outfitVetoes.order(createdAt.desc)) {
+            let reason = VetoReason(rawValue: row[vetoReason]) ?? .notMyStyle
+            let veto = OutfitVeto(
+                id: UUID(uuidString: row[id]) ?? UUID(),
+                outfitId: UUID(uuidString: row[outfitId]) ?? UUID(),
+                reason: reason,
+                createdAt: Date(timeIntervalSince1970: row[createdAt])
+            )
+            results.append(veto)
+        }
+        return results
+    }
+
+    func vetoCount(forReason reason: VetoReason) throws -> Int {
+        guard let db = db else { return 0 }
+        return try db.scalar(outfitVetoes.filter(vetoReason == reason.rawValue).count)
+    }
+
+    // MARK: - OutfitRating CRUD
+
+    func insertRating(_ rating: OutfitRating) throws {
+        try db?.run(outfitRatings.insert(
+            id <- rating.id.uuidString,
+            outfitId <- rating.outfitId.uuidString,
+            score <- rating.score,
+            createdAt <- rating.createdAt.timeIntervalSince1970
+        ))
+    }
+
+    func fetchAllRatings() throws -> [OutfitRating] {
+        guard let db = db else { return [] }
+        var results: [OutfitRating] = []
+        for row in try db.prepare(outfitRatings.order(createdAt.desc)) {
+            let rating = OutfitRating(
+                id: UUID(uuidString: row[id]) ?? UUID(),
+                outfitId: UUID(uuidString: row[outfitId]) ?? UUID(),
+                score: row[score],
+                createdAt: Date(timeIntervalSince1970: row[createdAt])
+            )
+            results.append(rating)
+        }
+        return results
+    }
+
+    func averageRating() throws -> Double {
+        guard let db = db else { return 0 }
+        let count = try db.scalar(outfitRatings.count)
+        guard count > 0 else { return 0 }
+        let total = try db.scalar(outfitRatings.select(score.sum)) ?? 0
+        return Double(total) / Double(count)
     }
 }

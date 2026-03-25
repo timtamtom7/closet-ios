@@ -12,6 +12,11 @@ final class OutfitViewModel {
     var errorMessage: String?
     var showOutfitDetail: Outfit?
     var currentSuggestionIndex = 0
+    var trendInsights: [OutfitEvolutionService.TrendInsight] = []
+    var layeringSuggestions: [String] = []
+    var forecasts: [WeatherService.DayForecast] = []
+    private var vetoes: [OutfitVeto] = []
+    private var ratings: [OutfitRating] = []
 
     var hasMoreSuggestions: Bool {
         currentSuggestionIndex < suggestedOutfits.count - 1
@@ -29,7 +34,10 @@ final class OutfitViewModel {
         do {
             try await DatabaseService.shared.initialize()
             outfits = try await DatabaseService.shared.fetchAllOutfits()
+            vetoes = try await DatabaseService.shared.fetchAllVetoes()
+            ratings = try await DatabaseService.shared.fetchAllRatings()
             await fetchWeather()
+            await fetchForecast()
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -40,9 +48,41 @@ final class OutfitViewModel {
     func fetchWeather() async {
         do {
             currentWeather = try await WeatherService.shared.fetchWeather()
+            await loadLayeringSuggestions()
         } catch {
             currentWeather = WeatherService.WeatherInfo(condition: "Clear", temperature: 20, icon: "sun.max.fill")
         }
+    }
+
+    @MainActor
+    func fetchForecast() async {
+        do {
+            forecasts = try await WeatherService.shared.fetchForecast(days: 5)
+        } catch {
+            forecasts = []
+        }
+    }
+
+    @MainActor
+    func loadTrends(items: [ClothingItem]) async {
+        trendInsights = await OutfitEvolutionService.shared.generateTrends(
+            items: items,
+            outfits: outfits,
+            vetoes: vetoes,
+            ratings: ratings
+        )
+    }
+
+    @MainActor
+    func loadLayeringSuggestions() async {
+        guard let temp = currentWeather?.temperature else {
+            layeringSuggestions = []
+            return
+        }
+        layeringSuggestions = await OutfitEvolutionService.shared.generateLayeringSuggestions(
+            items: [],
+            temperature: temp
+        )
     }
 
     @MainActor
@@ -59,6 +99,7 @@ final class OutfitViewModel {
             count: 5
         )
         currentSuggestionIndex = 0
+        await loadTrends(items: items)
     }
 
     @MainActor
@@ -69,6 +110,30 @@ final class OutfitViewModel {
             advanceSuggestion()
         } catch {
             errorMessage = "Failed to save outfit: \(error.localizedDescription)"
+        }
+    }
+
+    @MainActor
+    func vetoOutfit(_ outfit: Outfit, reason: VetoReason) async {
+        do {
+            let veto = OutfitVeto(outfitId: outfit.id, reason: reason)
+            try await DatabaseService.shared.insertVeto(veto)
+            vetoes.insert(veto, at: 0)
+            advanceSuggestion()
+        } catch {
+            errorMessage = "Failed to veto outfit: \(error.localizedDescription)"
+        }
+    }
+
+    @MainActor
+    func rateOutfit(_ outfit: Outfit, score: Int) async {
+        do {
+            let rating = OutfitRating(outfitId: outfit.id, score: score)
+            try await DatabaseService.shared.insertRating(rating)
+            ratings.insert(rating, at: 0)
+            advanceSuggestion()
+        } catch {
+            errorMessage = "Failed to rate outfit: \(error.localizedDescription)"
         }
     }
 

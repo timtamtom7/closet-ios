@@ -19,6 +19,7 @@ settings:
     INFOPLIST_KEY_NSCameraUsageDescription: "Closet needs camera access to photograph your clothing items."
     INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Closet needs photo library access to import photos of your clothing."
     INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Closet uses your location to fetch local weather for outfit suggestions."
+    INFOPLIST_KEY_NSCalendarsUsageDescription: "Closet uses your calendar to suggest outfits for upcoming events."
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: ""
 

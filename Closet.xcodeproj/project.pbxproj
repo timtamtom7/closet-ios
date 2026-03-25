@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006CD850704F93B14B6763D7 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712A873BD5B2CF58171AAFE2 /* ShareSheet.swift */; };
 		0350809730331ED1085B357C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB353DE450F77E0C73E9BC8A /* Enums.swift */; };
 		1DCC2F8A4AB286312AF9966F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */; };
 		28266E1F6C5F6161D0B18395 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D882131E61C3E9D495E24AAF /* SQLite */; };
+		2A075E50CF542675356E4387 /* OutfitEvolutionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */; };
+		2CFA06D11F11B4900FB2E40D /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A5FB2336689B53CED36A31 /* CalendarService.swift */; };
+		30BE14D8A3B577EC18A516D2 /* OutfitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0B116FCDA85DDE2E739F05 /* OutfitDetailView.swift */; };
 		312745444166704A7243D90D /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3CCA27951CD4F6DEA93241 /* WeatherService.swift */; };
 		3141319777E0EA7ED4A7EB47 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83098FB13BB6E695E4DC8DF /* ClothingItem.swift */; };
 		36E1E0E77466AF3BA62EE2A6 /* StyleProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B1C3DB3E4115341C205F5A /* StyleProfileService.swift */; };
 		3CEFC05ACECA6B3AD432ED12 /* OutfitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2E1A00C2A8D1368BA290D6 /* OutfitCard.swift */; };
 		3D532CF1C5D23C12365C4EDF /* VisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75AB7F27D46A4E5D074F302 /* VisionService.swift */; };
+		450B558CDC490CE44586D937 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E288CB9FE961FDFB982102B /* ShareService.swift */; };
+		501CF4AF4B18629BB1A26E8A /* OutfitVeto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011585C7D4E94B1D9EBEAB56 /* OutfitVeto.swift */; };
 		522BC691B7D8950F1BA42859 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBE872036A2ECA12928D2B5 /* ContentView.swift */; };
 		567B87ACD5F1F28AFBAE9416 /* WardrobeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0993C8FBA1D196463245AAA /* WardrobeViewModel.swift */; };
 		696FA5606C0B0029A1A91565 /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941CFF1753FD8D16CE825B /* Outfit.swift */; };
@@ -23,28 +29,39 @@
 		72948C93D5782C2D0280139F /* OutfitGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FC001ADFDC684ECA9893D1 /* OutfitGeneratorService.swift */; };
 		80A924937C5804CF5B2AE685 /* OutfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114996F0EB3B23B13F2FF61 /* OutfitViewModel.swift */; };
 		81015643B7D825EBF2DD2959 /* OutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8313288882499B4963812D89 /* OutfitView.swift */; };
+		8A9D1ECA3F8259B394320605 /* CameraOverlayGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D772190A40F3022787D420 /* CameraOverlayGuide.swift */; };
 		8BA8B5CC8FD0D7EF56EABD89 /* WardrobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133945EEDEB791CF114E8151 /* WardrobeView.swift */; };
+		AFFC008D4CE840438114281F /* OutfitRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14737E344E4DE3567684BDAC /* OutfitRating.swift */; };
 		CDBA6E20D06492D1DA230D55 /* StyleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FC5B057718A3902057B085 /* StyleProfileView.swift */; };
 		CE46D1AF111B24E2B552A256 /* ImageStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7052A88CB16BE1859C48 /* ImageStorageService.swift */; };
 		D7C58E8BDBB1D2C404C1CA4F /* WeatherBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */; };
 		DB03AEB35688741444772A15 /* StyleProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7BCCE9E8CEF107F1CEC15B /* StyleProfileViewModel.swift */; };
 		E5AAF4630C0D6FB8F9E73773 /* StyleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C259F5463BB5FFA2D6B5AF9 /* StyleProfile.swift */; };
+		E93892F3D5D7594CC80E10A4 /* OutfitEvolutionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C950C984A80160C0A24D8 /* OutfitEvolutionViews.swift */; };
 		EC23BCB5FD038D2CA293B938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE3E84B98E6A9571BC844CD /* Assets.xcassets */; };
 		EFEF87A322B398496F5A9419 /* StyleStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */; };
 		F332D4E2EDED3D215190E3AA /* CategoryChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC929130ADCA3FAFC6AB975B /* CategoryChip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011585C7D4E94B1D9EBEAB56 /* OutfitVeto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitVeto.swift; sourceTree = "<group>"; };
 		133945EEDEB791CF114E8151 /* WardrobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeView.swift; sourceTree = "<group>"; };
+		14737E344E4DE3567684BDAC /* OutfitRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitRating.swift; sourceTree = "<group>"; };
 		22941CFF1753FD8D16CE825B /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
 		3D2E1A00C2A8D1368BA290D6 /* OutfitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCard.swift; sourceTree = "<group>"; };
 		3F3CCA27951CD4F6DEA93241 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleStatCard.swift; sourceTree = "<group>"; };
 		4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBadge.swift; sourceTree = "<group>"; };
+		6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitEvolutionService.swift; sourceTree = "<group>"; };
+		712A873BD5B2CF58171AAFE2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		7C259F5463BB5FFA2D6B5AF9 /* StyleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfile.swift; sourceTree = "<group>"; };
+		7E288CB9FE961FDFB982102B /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
 		80E43D9A6EAE6EAF6BBF0D16 /* Closet.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Closet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8313288882499B4963812D89 /* OutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitView.swift; sourceTree = "<group>"; };
+		963C950C984A80160C0A24D8 /* OutfitEvolutionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitEvolutionViews.swift; sourceTree = "<group>"; };
 		A3DE0C50E752BA1CE3595351 /* ClothingItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemCard.swift; sourceTree = "<group>"; };
+		B0A5FB2336689B53CED36A31 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		C1D772190A40F3022787D420 /* CameraOverlayGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOverlayGuide.swift; sourceTree = "<group>"; };
 		C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		C83098FB13BB6E695E4DC8DF /* ClothingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
 		D0993C8FBA1D196463245AAA /* WardrobeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeViewModel.swift; sourceTree = "<group>"; };
@@ -58,6 +75,7 @@
 		E75AB7F27D46A4E5D074F302 /* VisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionService.swift; sourceTree = "<group>"; };
 		EBBE872036A2ECA12928D2B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EC929130ADCA3FAFC6AB975B /* CategoryChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChip.swift; sourceTree = "<group>"; };
+		ED0B116FCDA85DDE2E739F05 /* OutfitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitDetailView.swift; sourceTree = "<group>"; };
 		EEE3E84B98E6A9571BC844CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1FC001ADFDC684ECA9893D1 /* OutfitGeneratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitGeneratorService.swift; sourceTree = "<group>"; };
 		F6FC5B057718A3902057B085 /* StyleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfileView.swift; sourceTree = "<group>"; };
@@ -120,9 +138,12 @@
 		75899653E30749B240D12874 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B0A5FB2336689B53CED36A31 /* CalendarService.swift */,
 				C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */,
 				DEBB7052A88CB16BE1859C48 /* ImageStorageService.swift */,
+				6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */,
 				F1FC001ADFDC684ECA9893D1 /* OutfitGeneratorService.swift */,
+				7E288CB9FE961FDFB982102B /* ShareService.swift */,
 				E3B1C3DB3E4115341C205F5A /* StyleProfileService.swift */,
 				E75AB7F27D46A4E5D074F302 /* VisionService.swift */,
 				3F3CCA27951CD4F6DEA93241 /* WeatherService.swift */,
@@ -143,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				EBBE872036A2ECA12928D2B5 /* ContentView.swift */,
+				ED0B116FCDA85DDE2E739F05 /* OutfitDetailView.swift */,
 				8313288882499B4963812D89 /* OutfitView.swift */,
 				F6FC5B057718A3902057B085 /* StyleProfileView.swift */,
 				133945EEDEB791CF114E8151 /* WardrobeView.swift */,
@@ -164,6 +186,8 @@
 				C83098FB13BB6E695E4DC8DF /* ClothingItem.swift */,
 				DB353DE450F77E0C73E9BC8A /* Enums.swift */,
 				22941CFF1753FD8D16CE825B /* Outfit.swift */,
+				14737E344E4DE3567684BDAC /* OutfitRating.swift */,
+				011585C7D4E94B1D9EBEAB56 /* OutfitVeto.swift */,
 				7C259F5463BB5FFA2D6B5AF9 /* StyleProfile.swift */,
 			);
 			path = Models;
@@ -172,9 +196,12 @@
 		E470D86CE0806DA4039A81A4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C1D772190A40F3022787D420 /* CameraOverlayGuide.swift */,
 				EC929130ADCA3FAFC6AB975B /* CategoryChip.swift */,
 				A3DE0C50E752BA1CE3595351 /* ClothingItemCard.swift */,
 				3D2E1A00C2A8D1368BA290D6 /* OutfitCard.swift */,
+				963C950C984A80160C0A24D8 /* OutfitEvolutionViews.swift */,
+				712A873BD5B2CF58171AAFE2 /* ShareSheet.swift */,
 				42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */,
 				4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */,
 			);
@@ -263,6 +290,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CFA06D11F11B4900FB2E40D /* CalendarService.swift in Sources */,
+				8A9D1ECA3F8259B394320605 /* CameraOverlayGuide.swift in Sources */,
 				F332D4E2EDED3D215190E3AA /* CategoryChip.swift in Sources */,
 				6E0A4963F25DB253F66F9BB6 /* ClosetApp.swift in Sources */,
 				3141319777E0EA7ED4A7EB47 /* ClothingItem.swift in Sources */,
@@ -273,9 +302,16 @@
 				CE46D1AF111B24E2B552A256 /* ImageStorageService.swift in Sources */,
 				696FA5606C0B0029A1A91565 /* Outfit.swift in Sources */,
 				3CEFC05ACECA6B3AD432ED12 /* OutfitCard.swift in Sources */,
+				30BE14D8A3B577EC18A516D2 /* OutfitDetailView.swift in Sources */,
+				2A075E50CF542675356E4387 /* OutfitEvolutionService.swift in Sources */,
+				E93892F3D5D7594CC80E10A4 /* OutfitEvolutionViews.swift in Sources */,
 				72948C93D5782C2D0280139F /* OutfitGeneratorService.swift in Sources */,
+				AFFC008D4CE840438114281F /* OutfitRating.swift in Sources */,
+				501CF4AF4B18629BB1A26E8A /* OutfitVeto.swift in Sources */,
 				81015643B7D825EBF2DD2959 /* OutfitView.swift in Sources */,
 				80A924937C5804CF5B2AE685 /* OutfitViewModel.swift in Sources */,
+				450B558CDC490CE44586D937 /* ShareService.swift in Sources */,
+				006CD850704F93B14B6763D7 /* ShareSheet.swift in Sources */,
 				E5AAF4630C0D6FB8F9E73773 /* StyleProfile.swift in Sources */,
 				36E1E0E77466AF3BA62EE2A6 /* StyleProfileService.swift in Sources */,
 				CDBA6E20D06492D1DA230D55 /* StyleProfileView.swift in Sources */,
@@ -383,6 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Closet uses your calendar to suggest outfits for upcoming events.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Closet needs camera access to photograph your clothing items.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Closet uses your location to fetch local weather for outfit suggestions.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Closet needs photo library access to import photos of your clothing.";
@@ -452,6 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Closet uses your calendar to suggest outfits for upcoming events.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Closet needs camera access to photograph your clothing items.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Closet uses your location to fetch local weather for outfit suggestions.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Closet needs photo library access to import photos of your clothing.";

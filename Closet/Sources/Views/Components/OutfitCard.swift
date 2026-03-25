@@ -5,6 +5,24 @@ struct OutfitCard: View {
     let items: [ClothingItem]
     let onSave: () -> Void
     let onDismiss: () -> Void
+    let onWhyNot: (() -> Void)?
+    let onRate: (() -> Void)?
+
+    init(
+        outfit: Outfit,
+        items: [ClothingItem],
+        onSave: @escaping () -> Void,
+        onDismiss: @escaping () -> Void,
+        onWhyNot: (() -> Void)? = nil,
+        onRate: (() -> Void)? = nil
+    ) {
+        self.outfit = outfit
+        self.items = items
+        self.onSave = onSave
+        self.onDismiss = onDismiss
+        self.onWhyNot = onWhyNot
+        self.onRate = onRate
+    }
 
     @State private var offset: CGFloat = 0
     @State private var opacity: Double = 1
@@ -53,31 +71,95 @@ struct OutfitCard: View {
                 }
             }
 
-            HStack(spacing: 32) {
-                Button {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                        offset = -300
-                        opacity = 0
+            if onWhyNot != nil || onRate != nil {
+                HStack(spacing: 24) {
+                    if let onWhyNot = onWhyNot {
+                        Button {
+                            onWhyNot()
+                        } label: {
+                            VStack(spacing: 4) {
+                                Image(systemName: "hand.thumbsdown.circle.fill")
+                                    .font(.system(size: 36))
+                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                Text("Why not?")
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                            }
+                        }
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        onDismiss()
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 44))
-                        .foregroundStyle(Color(hex: "#E8E8E6"))
-                }
 
-                Button {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                        offset = 0
-                        opacity = 1
+                    Button {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                            offset = -300
+                            opacity = 0
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            onDismiss()
+                        }
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.system(size: 44))
+                                .foregroundStyle(Color(hex: "#E8E8E6"))
+                        }
                     }
-                    onSave()
-                } label: {
-                    Image(systemName: "heart.circle.fill")
-                        .font(.system(size: 44))
-                        .foregroundStyle(Color(hex: "#B8A898"))
+
+                    if let onRate = onRate {
+                        Button {
+                            onRate()
+                        } label: {
+                            VStack(spacing: 4) {
+                                Image(systemName: "star.circle.fill")
+                                    .font(.system(size: 36))
+                                    .foregroundStyle(Color(hex: "#B8A898"))
+                                Text("Rate")
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                            }
+                        }
+                    }
+
+                    Button {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                            offset = 0
+                            opacity = 1
+                        }
+                        onSave()
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: "heart.circle.fill")
+                                .font(.system(size: 44))
+                                .foregroundStyle(Color(hex: "#B8A898"))
+                        }
+                    }
+                }
+            } else {
+                HStack(spacing: 32) {
+                    Button {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                            offset = -300
+                            opacity = 0
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            onDismiss()
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 44))
+                            .foregroundStyle(Color(hex: "#E8E8E6"))
+                    }
+
+                    Button {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                            offset = 0
+                            opacity = 1
+                        }
+                        onSave()
+                    } label: {
+                        Image(systemName: "heart.circle.fill")
+                            .font(.system(size: 44))
+                            .foregroundStyle(Color(hex: "#B8A898"))
+                    }
                 }
             }
         }

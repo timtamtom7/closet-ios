@@ -3,12 +3,34 @@ import SwiftUI
 struct OutfitView: View {
     @State private var outfitViewModel = OutfitViewModel()
     @State private var wardrobeViewModel = WardrobeViewModel()
+    @State private var showWhyNotSheet = false
+    @State private var showScoreSheet = false
+    @State private var showShareSheet = false
+    @State private var shareImage: UIImage?
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 32) {
                     weatherSection
+
+                    if !outfitViewModel.trendInsights.isEmpty {
+                        TrendInsightsView(insights: outfitViewModel.trendInsights)
+                            .padding(.horizontal, 20)
+                    }
+
+                    if !outfitViewModel.layeringSuggestions.isEmpty {
+                        TemperatureLayeringView(
+                            suggestions: outfitViewModel.layeringSuggestions,
+                            temperature: outfitViewModel.currentWeather?.temperature ?? 20
+                        )
+                        .padding(.horizontal, 20)
+                    }
+
+                    if !outfitViewModel.forecasts.isEmpty {
+                        SeasonTransitionView(forecasts: outfitViewModel.forecasts, items: wardrobeViewModel.items)
+                            .padding(.horizontal, 20)
+                    }
 
                     generatorSection
 
@@ -22,9 +44,37 @@ struct OutfitView: View {
             .background(Color(hex: "#FAFAF8"))
             .navigationTitle("Outfits")
             .navigationBarTitleDisplayMode(.large)
+            .sheet(isPresented: $showWhyNotSheet) {
+                if let outfit = outfitViewModel.currentSuggestion {
+                    WhyNotSheet(outfit: outfit) { reason in
+                        Task {
+                            await outfitViewModel.vetoOutfit(outfit, reason: reason)
+                        }
+                    }
+                }
+            }
+            .sheet(isPresented: $showScoreSheet) {
+                if let outfit = outfitViewModel.currentSuggestion {
+                    OutfitScoreSheet(outfit: outfit) { score in
+                        Task {
+                            await outfitViewModel.rateOutfit(outfit, score: score)
+                        }
+                    }
+                }
+            }
+            .sheet(isPresented: $showShareSheet) {
+                if let image = shareImage {
+                    ShareSheet(items: [image])
+                }
+            }
             .task {
                 await outfitViewModel.loadOutfits()
                 await wardrobeViewModel.loadItems()
+            }
+            .onChange(of: outfitViewModel.outfits.count) { _, _ in
+                Task {
+                    await outfitViewModel.loadTrends(items: wardrobeViewModel.items)
+                }
             }
         }
     }
@@ -128,6 +178,12 @@ struct OutfitView: View {
                     },
                     onDismiss: {
                         outfitViewModel.advanceSuggestion()
+                    },
+                    onWhyNot: {
+                        showWhyNotSheet = true
+                    },
+                    onRate: {
+                        showScoreSheet = true
                     }
                 )
                 .padding(.horizontal, 20)
