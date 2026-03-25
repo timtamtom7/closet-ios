@@ -22,6 +22,9 @@ settings:
     INFOPLIST_KEY_NSCalendarsUsageDescription: "Closet uses your calendar to suggest outfits for upcoming events."
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: ""
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    GENERATE_INFOPLIST_FILE: YES
 
 packages:
   SQLite:

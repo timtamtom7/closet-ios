@@ -80,6 +80,9 @@ struct OutfitView: View {
                     ShareSheet(items: [image])
                 }
             }
+            .sheet(isPresented: $outfitViewModel.showSubscriptionPrompt) {
+                SubscriptionView(context: outfitViewModel.subscriptionContext)
+            }
             .task {
                 await outfitViewModel.loadOutfits()
                 await wardrobeViewModel.loadItems()

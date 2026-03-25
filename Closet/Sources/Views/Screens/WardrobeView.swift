@@ -69,6 +69,9 @@ struct WardrobeView: View {
                     }
                 })
             }
+            .sheet(isPresented: $viewModel.showSubscriptionPrompt) {
+                SubscriptionView(context: viewModel.subscriptionContext)
+            }
             .photosPicker(
                 isPresented: $viewModel.showingImagePicker,
                 selection: $viewModel.selectedPhotoItem,

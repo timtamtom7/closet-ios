@@ -21,6 +21,8 @@ final class WardrobeViewModel {
     var showItemDetail: ClothingItem?
     var showDeleteConfirmation = false
     var itemToDelete: ClothingItem?
+    var showSubscriptionPrompt = false
+    var subscriptionContext: SubscriptionView.SubscriptionContext = .general
 
     var filteredItems: [ClothingItem] {
         guard let cat = selectedCategory else { return items }
@@ -73,6 +75,14 @@ final class WardrobeViewModel {
     @MainActor
     func saveItem() async {
         guard let image = capturedImage else { return }
+
+        // Check subscription limits
+        let (allowed, reason) = await SubscriptionService.shared.canAddItem(currentCount: items.count)
+        if !allowed {
+            subscriptionContext = .itemLimit
+            showSubscriptionPrompt = true
+            return
+        }
 
         do {
             let imagePath = try await ImageStorageService.shared.saveImage(image)

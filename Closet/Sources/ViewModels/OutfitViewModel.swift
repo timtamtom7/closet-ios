@@ -15,6 +15,8 @@ final class OutfitViewModel {
     var trendInsights: [OutfitEvolutionService.TrendInsight] = []
     var layeringSuggestions: [String] = []
     var forecasts: [WeatherService.DayForecast] = []
+    var showSubscriptionPrompt = false
+    var subscriptionContext: SubscriptionView.SubscriptionContext = .general
     private var vetoes: [OutfitVeto] = []
     private var ratings: [OutfitRating] = []
 
@@ -104,6 +106,14 @@ final class OutfitViewModel {
 
     @MainActor
     func saveOutfit(_ outfit: Outfit) async {
+        // Check subscription limits
+        let (allowed, _) = await SubscriptionService.shared.canAddOutfit(currentCount: outfits.count)
+        if !allowed {
+            subscriptionContext = .outfitLimit
+            showSubscriptionPrompt = true
+            return
+        }
+
         do {
             try await DatabaseService.shared.insertOutfit(outfit)
             outfits.insert(outfit, at: 0)
