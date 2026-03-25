@@ -17,11 +17,23 @@ struct ContentView: View {
                 }
                 .tag(1)
 
+            ColorPaletteView()
+                .tabItem {
+                    Label("Palette", systemImage: "paintpalette")
+                }
+                .tag(2)
+
+            TravelPackingView()
+                .tabItem {
+                    Label("Travel", systemImage: "airplane")
+                }
+                .tag(3)
+
             StyleProfileView()
                 .tabItem {
                     Label("Style", systemImage: "person.crop.circle")
                 }
-                .tag(2)
+                .tag(4)
         }
         .tint(Color(hex: "#1C1C1E"))
     }

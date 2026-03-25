@@ -7,11 +7,15 @@ struct OutfitView: View {
     @State private var showScoreSheet = false
     @State private var showShareSheet = false
     @State private var shareImage: UIImage?
+    @State private var todayEvents: [CalendarService.CalendarEvent] = []
+    @State private var calendarAuthorized = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 32) {
+                    calendarSection
+
                     weatherSection
 
                     if !outfitViewModel.trendInsights.isEmpty {
@@ -79,6 +83,13 @@ struct OutfitView: View {
             .task {
                 await outfitViewModel.loadOutfits()
                 await wardrobeViewModel.loadItems()
+                calendarAuthorized = await CalendarService.shared.requestAccess()
+                if calendarAuthorized {
+                    todayEvents = await CalendarService.shared.fetchTodayEvents()
+                    if let firstEvent = todayEvents.first {
+                        outfitViewModel.selectedEventType = firstEvent.suggestedEventType
+                    }
+                }
             }
             .onChange(of: outfitViewModel.outfits.count) { _, _ in
                 Task {
@@ -86,6 +97,93 @@ struct OutfitView: View {
                 }
             }
         }
+    }
+
+    private var calendarSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: "calendar")
+                    .font(.system(size: 16))
+                    .foregroundStyle(Color(hex: "#B8A898"))
+                Text("Today's Calendar")
+                    .font(.system(size: 16, weight: .semibold, design: .serif))
+                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                Spacer()
+            }
+
+            if !todayEvents.isEmpty {
+                ForEach(todayEvents.prefix(3)) { event in
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(event.title)
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(Color(hex: "#1C1C1E"))
+                                .lineLimit(1)
+                            Text(timeRange(from: event))
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color(hex: "#6E6E73"))
+                        }
+
+                        Spacer()
+
+                        Button {
+                            outfitViewModel.selectedEventType = event.suggestedEventType
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: event.suggestedEventType.icon)
+                                    .font(.system(size: 12))
+                                Text(event.suggestedEventType.rawValue)
+                                    .font(.system(size: 12, weight: .medium))
+                            }
+                            .foregroundStyle(
+                                outfitViewModel.selectedEventType == event.suggestedEventType
+                                ? .white
+                                : Color(hex: "#1C1C1E")
+                            )
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(
+                                outfitViewModel.selectedEventType == event.suggestedEventType
+                                ? Color(hex: "#1C1C1E")
+                                : Color(hex: "#FFFFFF")
+                            )
+                            .clipShape(Capsule())
+                            .overlay {
+                                Capsule()
+                                    .stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(12)
+                    .background(Color(hex: "#FAFAF8"))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+            } else if calendarAuthorized {
+                Text("No events scheduled for today")
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color(hex: "#6E6E73"))
+            } else {
+                HStack(spacing: 8) {
+                    Image(systemName: "lock.shield")
+                        .font(.system(size: 12))
+                    Text("Calendar access not granted")
+                        .font(.system(size: 13))
+                }
+                .foregroundStyle(Color(hex: "#6E6E73"))
+            }
+        }
+        .padding(16)
+        .background(Color(hex: "#FFFFFF"))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal, 20)
+    }
+
+    private func timeRange(from event: CalendarService.CalendarEvent) -> String {
+        if event.isAllDay { return "All Day" }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return "\(formatter.string(from: event.startDate)) - \(formatter.string(from: event.endDate))"
     }
 
     private var weatherSection: some View {
