@@ -1,4 +1,5 @@
 import Foundation
+#if os(iOS)
 import UIKit
 import SwiftUI
 
@@ -183,6 +184,7 @@ struct AsyncImageView: View {
         }
     }
 }
+#endif
 
 extension Array {
     subscript(safe index: Int) -> Element? {

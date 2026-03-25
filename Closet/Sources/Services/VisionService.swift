@@ -1,12 +1,15 @@
 import Foundation
 import Vision
+#if os(iOS)
 import UIKit
+#endif
 
 actor VisionService {
     static let shared = VisionService()
 
     private init() {}
 
+    #if os(iOS)
     func detectClothing(in image: UIImage) async throws -> (category: ClothingCategory, colors: [String], tags: [String]) {
         guard let cgImage = image.cgImage else {
             return (.unknown, [], [])
@@ -18,7 +21,13 @@ actor VisionService {
 
         return (category, colors, tags)
     }
+    #else
+    func detectClothing(in imagePath: String) async throws -> (category: ClothingCategory, colors: [String], tags: [String]) {
+        return (.unknown, [], ["uncategorized"])
+    }
+    #endif
 
+    #if os(iOS)
     private func classifyImage(cgImage: CGImage) async throws -> ClothingCategory {
         try await withCheckedThrowingContinuation { continuation in
             let request = VNClassifyImageRequest { request, error in
@@ -104,8 +113,9 @@ actor VisionService {
         let sortedColors = colorCounts.sorted { $0.value > $1.value }
         return Array(sortedColors.prefix(colorCount).map { $0.key })
     }
+    #endif
 
-    private nonisolated func categorizeRGB(r: Int, g: Int, b: Int) -> String {
+    nonisolated private func categorizeRGB(r: Int, g: Int, b: Int) -> String {
         if r < 30 && g < 30 && b < 30 { return "#000000" }
         if r > 225 && g > 225 && b > 225 { return "#FFFFFF" }
         if r > 200 && g > 200 && b > 200 { return "#F5F5DC" }
@@ -145,7 +155,8 @@ actor VisionService {
         }
     }
 
-    private nonisolated func generateTags(from category: ClothingCategory, colors: [String]) -> [String] {
+    #if os(iOS)
+    nonisolated private func generateTags(from category: ClothingCategory, colors: [String]) -> [String] {
         var tags: [String] = []
 
         switch category {
@@ -176,4 +187,5 @@ actor VisionService {
 
         return tags
     }
+    #endif
 }

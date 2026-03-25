@@ -11,6 +11,7 @@
 		0350809730331ED1085B357C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB353DE450F77E0C73E9BC8A /* Enums.swift */; };
 		1A5EAD32ED8DD57A4ECAEFB1 /* ClosetEmptyIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC143CE0446888FF46485917 /* ClosetEmptyIllustration.swift */; };
 		1DCC2F8A4AB286312AF9966F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */; };
+		1E9B39DEEADE84676C86A5FE /* iPadDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09F579ECCD44AE18ED3B822 /* iPadDashboardView.swift */; };
 		28266E1F6C5F6161D0B18395 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D882131E61C3E9D495E24AAF /* SQLite */; };
 		2A075E50CF542675356E4387 /* OutfitEvolutionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */; };
 		2C1025B2ACDE6CF545013590 /* TravelPackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA39C6B1919B540600ADE25 /* TravelPackingService.swift */; };
@@ -92,6 +93,7 @@
 		DB353DE450F77E0C73E9BC8A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		DD7BCCE9E8CEF107F1CEC15B /* StyleProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfileViewModel.swift; sourceTree = "<group>"; };
 		DEBB7052A88CB16BE1859C48 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
+		E0BBB0C599679E468DADCFB8 /* ClosetMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClosetMac.entitlements; sourceTree = "<group>"; };
 		E114996F0EB3B23B13F2FF61 /* OutfitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitViewModel.swift; sourceTree = "<group>"; };
 		E1328A355D6AF6FCCA2149F5 /* ClosetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetApp.swift; sourceTree = "<group>"; };
 		E3B1C3DB3E4115341C205F5A /* StyleProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfileService.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		EC929130ADCA3FAFC6AB975B /* CategoryChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChip.swift; sourceTree = "<group>"; };
 		ED0B116FCDA85DDE2E739F05 /* OutfitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitDetailView.swift; sourceTree = "<group>"; };
 		EEE3E84B98E6A9571BC844CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F09F579ECCD44AE18ED3B822 /* iPadDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadDashboardView.swift; sourceTree = "<group>"; };
 		F1FC001ADFDC684ECA9893D1 /* OutfitGeneratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitGeneratorService.swift; sourceTree = "<group>"; };
 		F6FC5B057718A3902057B085 /* StyleProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +144,7 @@
 			children = (
 				EEE3E84B98E6A9571BC844CD /* Assets.xcassets */,
 				D7008E43726B6B3E1502AB72 /* Closet.entitlements */,
+				E0BBB0C599679E468DADCFB8 /* ClosetMac.entitlements */,
 			);
 			name = Resources;
 			path = Closet/Resources;
@@ -202,6 +206,7 @@
 			children = (
 				51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */,
 				EBBE872036A2ECA12928D2B5 /* ContentView.swift */,
+				F09F579ECCD44AE18ED3B822 /* iPadDashboardView.swift */,
 				5243CF8626203B327841B25B /* MonthlyTrendView.swift */,
 				ED0B116FCDA85DDE2E739F05 /* OutfitDetailView.swift */,
 				3CCC52F97EE3CE3FDD9C7316 /* OutfitTimelineView.swift */,
@@ -429,6 +434,7 @@
 				567B87ACD5F1F28AFBAE9416 /* WardrobeViewModel.swift in Sources */,
 				D7C58E8BDBB1D2C404C1CA4F /* WeatherBadge.swift in Sources */,
 				312745444166704A7243D90D /* WeatherService.swift in Sources */,
+				1E9B39DEEADE84676C86A5FE /* iPadDashboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

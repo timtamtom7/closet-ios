@@ -1,11 +1,14 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 struct ContentView: View {
     @State private var selectedTab = 0
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
     var body: some View {
+        #if os(iOS)
         Group {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 iPadContentView
@@ -13,8 +16,12 @@ struct ContentView: View {
                 iPhoneContentView
             }
         }
+        #else
+        macOSContentView
+        #endif
     }
 
+    #if os(iOS)
     private var iPhoneContentView: some View {
         TabView(selection: $selectedTab) {
             WardrobeView()
@@ -51,44 +58,13 @@ struct ContentView: View {
     }
 
     private var iPadContentView: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
-            // Sidebar
-            List {
-                NavigationLink(destination: WardrobeView()) {
-                    Label("Wardrobe", systemImage: "tshirt")
-                }
-                NavigationLink(destination: OutfitView()) {
-                    Label("Outfits", systemImage: "sparkles")
-                }
-                NavigationLink(destination: ColorPaletteView()) {
-                    Label("Palette", systemImage: "paintpalette")
-                }
-                NavigationLink(destination: TravelPackingView()) {
-                    Label("Travel", systemImage: "airplane")
-                }
-                NavigationLink(destination: StyleProfileView()) {
-                    Label("Style", systemImage: "person.crop.circle")
-                }
-            }
-            .navigationTitle("Closet")
-            .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 300)
-        } detail: {
-            NavigationStack {
-                ZStack {
-                    Color(hex: "#F5F5F7").ignoresSafeArea()
-                    VStack(spacing: 16) {
-                        Image(systemName: "tshirt.fill")
-                            .font(.system(size: 72))
-                            .foregroundColor(Color(hex: "#1C1C1E").opacity(0.1))
-                        Text("Select a view from the sidebar")
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .navigationTitle("Closet")
-                .navigationBarTitleDisplayMode(.large)
-            }
-        }
-        .tint(Color(hex: "#1C1C1E"))
+        iPadDashboardView()
     }
+    #endif
+
+    #if os(macOS)
+    private var macOSContentView: some View {
+        iPadDashboardView()
+    }
+    #endif
 }
