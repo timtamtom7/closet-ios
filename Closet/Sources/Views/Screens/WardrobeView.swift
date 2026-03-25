@@ -106,11 +106,9 @@ struct WardrobeView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             Spacer()
-            Image(systemName: "tshirt")
-                .font(.system(size: 60))
-                .foregroundStyle(Color(hex: "#E8E8E6"))
+            ClosetEmptyIllustration(size: 180)
             Text("Your wardrobe is empty")
                 .font(.system(size: 22, weight: .semibold, design: .serif))
                 .foregroundStyle(Color(hex: "#1C1C1E"))

@@ -242,9 +242,7 @@ struct ColorPaletteView: View {
 
     private var emptyState: some View {
         VStack(spacing: 16) {
-            Image(systemName: "paintpalette")
-                .font(.system(size: 48))
-                .foregroundStyle(Color(hex: "#E8E8E6"))
+            ClosetEmptyIllustration(size: 160)
 
             Text("No colors to analyze yet")
                 .font(.system(size: 20, weight: .semibold, design: .serif))
