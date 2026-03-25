@@ -20,6 +20,8 @@ struct WardrobeView: View {
                         ProgressView()
                             .scaleEffect(1.2)
                         Spacer()
+                    } else if let error = viewModel.errorMessage {
+                        errorState(message: error)
                     } else if viewModel.filteredItems.isEmpty {
                         emptyState
                     } else {
@@ -112,10 +114,37 @@ struct WardrobeView: View {
             Text("Your wardrobe is empty")
                 .font(.system(size: 22, weight: .semibold, design: .serif))
                 .foregroundStyle(Color(hex: "#1C1C1E"))
-            Text("Tap the camera button to add your first piece")
+            Text("Tap the camera button below to add your first piece")
                 .font(.system(size: 15))
                 .foregroundStyle(Color(hex: "#6E6E73"))
                 .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .padding(.horizontal, 40)
+    }
+
+    private func errorState(message: String) -> some View {
+        VStack(spacing: 16) {
+            Spacer()
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 48))
+                .foregroundStyle(Color(hex: "#C45C4A"))
+            Text("Something went wrong")
+                .font(.system(size: 20, weight: .semibold, design: .serif))
+                .foregroundStyle(Color(hex: "#1C1C1E"))
+            Text(message)
+                .font(.system(size: 14))
+                .foregroundStyle(Color(hex: "#6E6E73"))
+                .multilineTextAlignment(.center)
+            Button("Try Again") {
+                Task { await viewModel.loadItems() }
+            }
+            .font(.system(size: 15, weight: .medium))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 10)
+            .background(Color(hex: "#1C1C1E"))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
             Spacer()
         }
         .padding(.horizontal, 40)
@@ -142,105 +171,117 @@ struct AddItemSheet: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    if let image = viewModel.capturedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxHeight: 300)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                    }
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Name")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
-                        TextField("Item name", text: $viewModel.itemName)
-                            .font(.system(size: 17))
-                            .padding(12)
-                            .background(Color(hex: "#FAFAF8"))
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 8).stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
-                            }
-                    }
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Category")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
-                        Picker("Category", selection: Binding(
-                            get: { viewModel.detectedCategory ?? .unknown },
-                            set: { viewModel.detectedCategory = $0 }
-                        )) {
-                            ForEach(ClothingCategory.allCases) { cat in
-                                Text(cat.rawValue).tag(cat)
-                            }
-                        }
-                        .pickerStyle(.menu)
-                    }
-
-                    if !viewModel.detectedColors.isEmpty {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Detected Colors")
-                                .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
-                            HStack(spacing: 8) {
-                                ForEach(viewModel.detectedColors, id: \.self) { color in
-                                    Circle()
-                                        .fill(Color(hex: color))
-                                        .frame(width: 28, height: 28)
-                                        .overlay {
-                                            Circle().stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
-                                        }
-                                }
-                            }
-                        }
-                    }
-
-                    if !viewModel.detectedTags.isEmpty {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Tags")
-                                .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
-                            FlowLayout(spacing: 6) {
-                                ForEach(viewModel.detectedTags, id: \.self) { tag in
-                                    Text(tag)
-                                        .font(.system(size: 12))
-                                        .foregroundStyle(Color(hex: "#6E6E73"))
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 4)
-                                        .background(Color(hex: "#E8E8E6"))
-                                        .clipShape(Capsule())
-                                }
-                            }
-                        }
-                    }
+            if viewModel.processingImage {
+                VStack(spacing: 16) {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                    Text("Analyzing your item...")
+                        .font(.system(size: 15))
+                        .foregroundStyle(Color(hex: "#6E6E73"))
                 }
-                .padding(20)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(hex: "#FAFAF8"))
+            } else {
+                ScrollView {
+                    VStack(spacing: 24) {
+                        if let image = viewModel.capturedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxHeight: 300)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Name")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(Color(hex: "#6E6E73"))
+                            TextField("Item name", text: $viewModel.itemName)
+                                .font(.system(size: 17))
+                                .padding(12)
+                                .background(Color(hex: "#FAFAF8"))
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 8).stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                                }
+                        }
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Category")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(Color(hex: "#6E6E73"))
+                            Picker("Category", selection: Binding(
+                                get: { viewModel.detectedCategory ?? .unknown },
+                                set: { viewModel.detectedCategory = $0 }
+                            )) {
+                                ForEach(ClothingCategory.allCases) { cat in
+                                    Text(cat.rawValue).tag(cat)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+
+                        if !viewModel.detectedColors.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Detected Colors")
+                                    .font(.system(size: 13, weight: .medium))
+                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                HStack(spacing: 8) {
+                                    ForEach(viewModel.detectedColors, id: \.self) { color in
+                                        Circle()
+                                            .fill(Color(hex: color))
+                                            .frame(width: 28, height: 28)
+                                            .overlay {
+                                                Circle().stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                                            }
+                                    }
+                                }
+                            }
+                        }
+
+                        if !viewModel.detectedTags.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Tags")
+                                    .font(.system(size: 13, weight: .medium))
+                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                FlowLayout(spacing: 6) {
+                                    ForEach(viewModel.detectedTags, id: \.self) { tag in
+                                        Text(tag)
+                                            .font(.system(size: 12))
+                                            .foregroundStyle(Color(hex: "#6E6E73"))
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 4)
+                                            .background(Color(hex: "#E8E8E6"))
+                                            .clipShape(Capsule())
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .padding(20)
+                }
+                .background(Color(hex: "#FAFAF8"))
             }
-            .background(Color(hex: "#FAFAF8"))
-            .navigationTitle("Add Item")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        viewModel.resetCaptureState()
+        }
+        .navigationTitle("Add Item")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    viewModel.resetCaptureState()
+                    dismiss()
+                }
+                .foregroundStyle(Color(hex: "#6E6E73"))
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Save") {
+                    Task {
+                        await viewModel.saveItem()
                         dismiss()
                     }
-                    .foregroundStyle(Color(hex: "#6E6E73"))
                 }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        Task {
-                            await viewModel.saveItem()
-                            dismiss()
-                        }
-                    }
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
-                }
+                .fontWeight(.semibold)
+                .foregroundStyle(Color(hex: "#1C1C1E"))
             }
         }
     }

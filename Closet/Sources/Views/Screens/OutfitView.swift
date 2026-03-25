@@ -34,7 +34,9 @@ struct OutfitView: View {
 
                     generatorSection
 
-                    if !outfitViewModel.outfits.isEmpty {
+                    if outfitViewModel.outfits.isEmpty && !outfitViewModel.isLoading {
+                        outfitEmptyState
+                    } else if !outfitViewModel.outfits.isEmpty {
                         outfitLogSection
                     }
                 }
@@ -44,6 +46,13 @@ struct OutfitView: View {
             .background(Color(hex: "#FAFAF8"))
             .navigationTitle("Outfits")
             .navigationBarTitleDisplayMode(.large)
+            .overlay(alignment: .top) {
+                if outfitViewModel.isLoading {
+                    ProgressView()
+                        .scaleEffect(1.2)
+                        .padding(.top, 8)
+                }
+            }
             .sheet(isPresented: $showWhyNotSheet) {
                 if let outfit = outfitViewModel.currentSuggestion {
                     WhyNotSheet(outfit: outfit) { reason in
@@ -90,6 +99,30 @@ struct OutfitView: View {
             Spacer()
         }
         .padding(.horizontal, 20)
+    }
+
+    private var outfitEmptyState: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 48))
+                .foregroundStyle(Color(hex: "#E8E8E6"))
+            Text("No outfits saved yet")
+                .font(.system(size: 20, weight: .semibold, design: .serif))
+                .foregroundStyle(Color(hex: "#1C1C1E"))
+            if wardrobeViewModel.items.count < 3 {
+                Text("Add at least 3 clothing items to start generating outfits")
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .multilineTextAlignment(.center)
+            } else {
+                Text("Generate your first outfit above")
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical, 20)
     }
 
     private var generatorSection: some View {

@@ -25,18 +25,12 @@ actor OutfitGeneratorService {
 
         let outfitCount = min(count, max(tops.count * bottoms.count * shoes.count, 1))
 
-        for i in 0..<outfitCount {
-            var selectedItems: [ClothingItem] = []
+        for _ in 0..<outfitCount {
+            guard let top = tops.randomElement() else { continue }
+            guard let bottom = bottoms.randomElement() else { continue }
+            guard let shoe = shoes.randomElement() else { continue }
 
-            if let top = tops.randomElement(), !selectedItems.contains(top) {
-                selectedItems.append(top)
-            }
-            if let bottom = bottoms.randomElement(), !selectedItems.contains(bottom) {
-                selectedItems.append(bottom)
-            }
-            if let shoe = shoes.randomElement(), !selectedItems.contains(shoe) {
-                selectedItems.append(shoe)
-            }
+            var selectedItems: [ClothingItem] = [top, bottom, shoe]
 
             if mood.acceptsColor && Bool.random() {
                 if let acc = accessories.randomElement(), !selectedItems.contains(acc) {
@@ -44,7 +38,7 @@ actor OutfitGeneratorService {
                 }
             }
 
-            if temperature != nil && temperature! < 15 && !outerwear.isEmpty {
+            if let temp = temperature, temp < 15 && !outerwear.isEmpty {
                 if let layer = outerwear.randomElement(), !selectedItems.contains(layer) {
                     selectedItems.append(layer)
                 }
