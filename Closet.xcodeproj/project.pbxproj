@@ -25,6 +25,7 @@
 		501CF4AF4B18629BB1A26E8A /* OutfitVeto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011585C7D4E94B1D9EBEAB56 /* OutfitVeto.swift */; };
 		522BC691B7D8950F1BA42859 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBE872036A2ECA12928D2B5 /* ContentView.swift */; };
 		567B87ACD5F1F28AFBAE9416 /* WardrobeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0993C8FBA1D196463245AAA /* WardrobeViewModel.swift */; };
+		56C3C996C63047F3F361B690 /* OutfitTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCC52F97EE3CE3FDD9C7316 /* OutfitTimelineView.swift */; };
 		696FA5606C0B0029A1A91565 /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941CFF1753FD8D16CE825B /* Outfit.swift */; };
 		6E0A4963F25DB253F66F9BB6 /* ClosetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1328A355D6AF6FCCA2149F5 /* ClosetApp.swift */; };
 		7166ECA6601BE1FE345C6089 /* ClothingItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DE0C50E752BA1CE3595351 /* ClothingItemCard.swift */; };
@@ -35,6 +36,7 @@
 		8A9D1ECA3F8259B394320605 /* CameraOverlayGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D772190A40F3022787D420 /* CameraOverlayGuide.swift */; };
 		8BA8B5CC8FD0D7EF56EABD89 /* WardrobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133945EEDEB791CF114E8151 /* WardrobeView.swift */; };
 		8C3D97798D96162DA67779DA /* TravelPackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124481F499061E88D421F66 /* TravelPackingView.swift */; };
+		A7A99D9D9E63BD34AD647B9A /* MonthlyTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5243CF8626203B327841B25B /* MonthlyTrendView.swift */; };
 		AFFC008D4CE840438114281F /* OutfitRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14737E344E4DE3567684BDAC /* OutfitRating.swift */; };
 		B99E130321017D0A7C94C1A9 /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */; };
 		C77DF17C28D09FD505185110 /* ColorPaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4109AC18734D6E3006A71446 /* ColorPaletteViewModel.swift */; };
@@ -49,6 +51,7 @@
 		EC23BCB5FD038D2CA293B938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEE3E84B98E6A9571BC844CD /* Assets.xcassets */; };
 		EFEF87A322B398496F5A9419 /* StyleStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */; };
 		F332D4E2EDED3D215190E3AA /* CategoryChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC929130ADCA3FAFC6AB975B /* CategoryChip.swift */; };
+		F757FF75813566EC8CC99D81 /* MonthlyTrendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43AF3D5BD693D4B022DE9C3 /* MonthlyTrendService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,12 +62,14 @@
 		22941CFF1753FD8D16CE825B /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
 		2C517CE170C4CF717ED31FB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		34DF54B466A7244DA1F160CD /* ColorPaletteAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteAnalysisService.swift; sourceTree = "<group>"; };
+		3CCC52F97EE3CE3FDD9C7316 /* OutfitTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitTimelineView.swift; sourceTree = "<group>"; };
 		3D2E1A00C2A8D1368BA290D6 /* OutfitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCard.swift; sourceTree = "<group>"; };
 		3F3CCA27951CD4F6DEA93241 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		4109AC18734D6E3006A71446 /* ColorPaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteViewModel.swift; sourceTree = "<group>"; };
 		42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleStatCard.swift; sourceTree = "<group>"; };
 		4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBadge.swift; sourceTree = "<group>"; };
 		51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
+		5243CF8626203B327841B25B /* MonthlyTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTrendView.swift; sourceTree = "<group>"; };
 		5A0EF8C77CCBB21BB27E5F78 /* ClosetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetWatchApp.swift; sourceTree = "<group>"; };
 		6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitEvolutionService.swift; sourceTree = "<group>"; };
 		712A873BD5B2CF58171AAFE2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 		86736196D18D18A8802689B2 /* TravelPackingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelPackingViewModel.swift; sourceTree = "<group>"; };
 		963C950C984A80160C0A24D8 /* OutfitEvolutionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitEvolutionViews.swift; sourceTree = "<group>"; };
 		A3DE0C50E752BA1CE3595351 /* ClothingItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemCard.swift; sourceTree = "<group>"; };
+		A43AF3D5BD693D4B022DE9C3 /* MonthlyTrendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTrendService.swift; sourceTree = "<group>"; };
 		B0A5FB2336689B53CED36A31 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		C1D772190A40F3022787D420 /* CameraOverlayGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOverlayGuide.swift; sourceTree = "<group>"; };
 		C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				34DF54B466A7244DA1F160CD /* ColorPaletteAnalysisService.swift */,
 				C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */,
 				DEBB7052A88CB16BE1859C48 /* ImageStorageService.swift */,
+				A43AF3D5BD693D4B022DE9C3 /* MonthlyTrendService.swift */,
 				6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */,
 				F1FC001ADFDC684ECA9893D1 /* OutfitGeneratorService.swift */,
 				7E288CB9FE961FDFB982102B /* ShareService.swift */,
@@ -195,7 +202,9 @@
 			children = (
 				51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */,
 				EBBE872036A2ECA12928D2B5 /* ContentView.swift */,
+				5243CF8626203B327841B25B /* MonthlyTrendView.swift */,
 				ED0B116FCDA85DDE2E739F05 /* OutfitDetailView.swift */,
+				3CCC52F97EE3CE3FDD9C7316 /* OutfitTimelineView.swift */,
 				8313288882499B4963812D89 /* OutfitView.swift */,
 				F6FC5B057718A3902057B085 /* StyleProfileView.swift */,
 				8124481F499061E88D421F66 /* TravelPackingView.swift */,
@@ -392,6 +401,8 @@
 				1DCC2F8A4AB286312AF9966F /* DatabaseService.swift in Sources */,
 				0350809730331ED1085B357C /* Enums.swift in Sources */,
 				CE46D1AF111B24E2B552A256 /* ImageStorageService.swift in Sources */,
+				F757FF75813566EC8CC99D81 /* MonthlyTrendService.swift in Sources */,
+				A7A99D9D9E63BD34AD647B9A /* MonthlyTrendView.swift in Sources */,
 				696FA5606C0B0029A1A91565 /* Outfit.swift in Sources */,
 				3CEFC05ACECA6B3AD432ED12 /* OutfitCard.swift in Sources */,
 				30BE14D8A3B577EC18A516D2 /* OutfitDetailView.swift in Sources */,
@@ -399,6 +410,7 @@
 				E93892F3D5D7594CC80E10A4 /* OutfitEvolutionViews.swift in Sources */,
 				72948C93D5782C2D0280139F /* OutfitGeneratorService.swift in Sources */,
 				AFFC008D4CE840438114281F /* OutfitRating.swift in Sources */,
+				56C3C996C63047F3F361B690 /* OutfitTimelineView.swift in Sources */,
 				501CF4AF4B18629BB1A26E8A /* OutfitVeto.swift in Sources */,
 				81015643B7D825EBF2DD2959 /* OutfitView.swift in Sources */,
 				80A924937C5804CF5B2AE685 /* OutfitViewModel.swift in Sources */,

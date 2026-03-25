@@ -4,6 +4,9 @@ struct StyleProfileView: View {
     @State private var viewModel = StyleProfileViewModel()
     @State private var wardrobeViewModel = WardrobeViewModel()
     @State private var outfitViewModel = OutfitViewModel()
+    @State private var monthlyTrendViewModel = MonthlyTrendViewModel()
+    @State private var showMonthlyTrend = false
+    @State private var showOutfitTimeline = false
 
     var body: some View {
         NavigationStack {
@@ -16,6 +19,8 @@ struct StyleProfileView: View {
                         Spacer()
                     } else {
                         headerSection
+
+                        quickActionsSection
 
                         statsSection
 
@@ -32,22 +37,74 @@ struct StyleProfileView: View {
             .background(Color(hex: "#FAFAF8"))
             .navigationTitle("Style Profile")
             .navigationBarTitleDisplayMode(.large)
+            .sheet(isPresented: $showMonthlyTrend) {
+                if let report = monthlyTrendViewModel.report {
+                    MonthlyTrendView(report: report)
+                }
+            }
+            .sheet(isPresented: $showOutfitTimeline) {
+                OutfitTimelineView(outfits: outfitViewModel.outfits, items: wardrobeViewModel.items)
+            }
             .task {
                 await wardrobeViewModel.loadItems()
                 await outfitViewModel.loadOutfits()
                 await viewModel.recomputeProfile(items: wardrobeViewModel.items, outfits: outfitViewModel.outfits)
+                await monthlyTrendViewModel.loadReport(items: wardrobeViewModel.items, outfits: outfitViewModel.outfits)
             }
             .onChange(of: wardrobeViewModel.items.count) { _, _ in
                 Task {
                     await viewModel.recomputeProfile(items: wardrobeViewModel.items, outfits: outfitViewModel.outfits)
+                    await monthlyTrendViewModel.loadReport(items: wardrobeViewModel.items, outfits: outfitViewModel.outfits)
                 }
             }
             .onChange(of: outfitViewModel.outfits.count) { _, _ in
                 Task {
                     await viewModel.recomputeProfile(items: wardrobeViewModel.items, outfits: outfitViewModel.outfits)
+                    await monthlyTrendViewModel.loadReport(items: wardrobeViewModel.items, outfits: outfitViewModel.outfits)
                 }
             }
         }
+    }
+
+    private var quickActionsSection: some View {
+        HStack(spacing: 12) {
+            Button {
+                showMonthlyTrend = true
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "chart.line.uptrend.xyaxis")
+                        .font(.system(size: 14))
+                    Text("Monthly Trends")
+                        .font(.system(size: 14, weight: .medium))
+                }
+                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(Color(hex: "#FFFFFF"))
+                .clipShape(Capsule())
+                .shadow(color: Color(hex: "#1C1C1E").opacity(0.05), radius: 4, x: 0, y: 2)
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                showOutfitTimeline = true
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 14))
+                    Text("Timeline")
+                        .font(.system(size: 14, weight: .medium))
+                }
+                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(Color(hex: "#FFFFFF"))
+                .clipShape(Capsule())
+                .shadow(color: Color(hex: "#1C1C1E").opacity(0.05), radius: 4, x: 0, y: 2)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 20)
     }
 
     private var headerSection: some View {
