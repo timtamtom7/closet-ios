@@ -30,6 +30,7 @@
 		72948C93D5782C2D0280139F /* OutfitGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FC001ADFDC684ECA9893D1 /* OutfitGeneratorService.swift */; };
 		80A924937C5804CF5B2AE685 /* OutfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E114996F0EB3B23B13F2FF61 /* OutfitViewModel.swift */; };
 		81015643B7D825EBF2DD2959 /* OutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8313288882499B4963812D89 /* OutfitView.swift */; };
+		86DF00F68AD7B944189D3A68 /* ClosetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EF8C77CCBB21BB27E5F78 /* ClosetWatchApp.swift */; };
 		8A9D1ECA3F8259B394320605 /* CameraOverlayGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D772190A40F3022787D420 /* CameraOverlayGuide.swift */; };
 		8BA8B5CC8FD0D7EF56EABD89 /* WardrobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133945EEDEB791CF114E8151 /* WardrobeView.swift */; };
 		8C3D97798D96162DA67779DA /* TravelPackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124481F499061E88D421F66 /* TravelPackingView.swift */; };
@@ -55,6 +56,7 @@
 		133945EEDEB791CF114E8151 /* WardrobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeView.swift; sourceTree = "<group>"; };
 		14737E344E4DE3567684BDAC /* OutfitRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitRating.swift; sourceTree = "<group>"; };
 		22941CFF1753FD8D16CE825B /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
+		2C517CE170C4CF717ED31FB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		34DF54B466A7244DA1F160CD /* ColorPaletteAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteAnalysisService.swift; sourceTree = "<group>"; };
 		3D2E1A00C2A8D1368BA290D6 /* OutfitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCard.swift; sourceTree = "<group>"; };
 		3F3CCA27951CD4F6DEA93241 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleStatCard.swift; sourceTree = "<group>"; };
 		4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBadge.swift; sourceTree = "<group>"; };
 		51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
+		5A0EF8C77CCBB21BB27E5F78 /* ClosetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetWatchApp.swift; sourceTree = "<group>"; };
 		6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitEvolutionService.swift; sourceTree = "<group>"; };
 		712A873BD5B2CF58171AAFE2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		7C259F5463BB5FFA2D6B5AF9 /* StyleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfile.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		C83098FB13BB6E695E4DC8DF /* ClothingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
 		D0993C8FBA1D196463245AAA /* WardrobeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeViewModel.swift; sourceTree = "<group>"; };
+		D29D8D5373899A289A409850 /* ClosetWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosetWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7008E43726B6B3E1502AB72 /* Closet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Closet.entitlements; sourceTree = "<group>"; };
 		DB353DE450F77E0C73E9BC8A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		DD7BCCE9E8CEF107F1CEC15B /* StyleProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleProfileViewModel.swift; sourceTree = "<group>"; };
@@ -115,6 +119,13 @@
 				D0993C8FBA1D196463245AAA /* WardrobeViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1194EF339A16AF459A0D986E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1637D7D51741E4ACA2B81DED /* Resources */ = {
@@ -170,6 +181,7 @@
 		8E48550BC372D3613E23E4C6 = {
 			isa = PBXGroup;
 			children = (
+				C5E661B2725DB4D5B1D06C15 /* ClosetWatch */,
 				1637D7D51741E4ACA2B81DED /* Resources */,
 				6204D75F41F6BAA1E1F01214 /* Sources */,
 				BE543F7CF944F6CDF57057D5 /* Products */,
@@ -194,8 +206,27 @@
 			isa = PBXGroup;
 			children = (
 				80E43D9A6EAE6EAF6BBF0D16 /* Closet.app */,
+				D29D8D5373899A289A409850 /* ClosetWatch.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C5E661B2725DB4D5B1D06C15 /* ClosetWatch */ = {
+			isa = PBXGroup;
+			children = (
+				2C517CE170C4CF717ED31FB7 /* Info.plist */,
+				FBFA0262D31858DE9D46F656 /* App */,
+				1194EF339A16AF459A0D986E /* Models */,
+				CBCCB1686ED47189A2A37E64 /* Views */,
+			);
+			path = ClosetWatch;
+			sourceTree = "<group>";
+		};
+		CBCCB1686ED47189A2A37E64 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D8E6E510C8876EA9DCADBC3A /* Models */ = {
@@ -224,6 +255,14 @@
 				4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FBFA0262D31858DE9D46F656 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5A0EF8C77CCBB21BB27E5F78 /* ClosetWatchApp.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		FEFD39F25C97832B571E8042 /* App */ = {
@@ -257,6 +296,21 @@
 			productReference = 80E43D9A6EAE6EAF6BBF0D16 /* Closet.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BDFB840AA57BD0074E6F5DF6 /* ClosetWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F2A2CA37A66B6CF8F87F33A /* Build configuration list for PBXNativeTarget "ClosetWatch" */;
+			buildPhases = (
+				2AB316C5B79CE3E3C95B1E20 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClosetWatch;
+			productName = ClosetWatch;
+			productReference = D29D8D5373899A289A409850 /* ClosetWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -267,6 +321,10 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					2ED05ADE6128BC0D13E1745F = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					BDFB840AA57BD0074E6F5DF6 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
@@ -288,6 +346,7 @@
 			projectRoot = "";
 			targets = (
 				2ED05ADE6128BC0D13E1745F /* Closet */,
+				BDFB840AA57BD0074E6F5DF6 /* ClosetWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -304,6 +363,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2AB316C5B79CE3E3C95B1E20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86DF00F68AD7B944189D3A68 /* ClosetWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4122891F4DCFF3FF37D1170E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -366,10 +433,30 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.closet.stylist;
+				PRODUCT_MODULE_NAME = Closet;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		56129989A8C7B7E3C74DB69D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ClosetWatch/Info.plist;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.closet.stylist.watchkitapp;
+				PRODUCT_MODULE_NAME = ClosetWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
 		};
 		5A9458CEF699BC3264148CE5 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -385,6 +472,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.closet.stylist;
+				PRODUCT_MODULE_NAME = Closet;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -457,12 +545,30 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		89F403DB3DE44D33ED37FC70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ClosetWatch/Info.plist;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.closet.stylist.watchkitapp;
+				PRODUCT_MODULE_NAME = ClosetWatch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
 		};
@@ -526,7 +632,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -543,6 +648,15 @@
 			buildConfigurations = (
 				7DF3D45E8BF42DDCBF59B5E3 /* Debug */,
 				8CFFBC877DCB64C66ABBCA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9F2A2CA37A66B6CF8F87F33A /* Build configuration list for PBXNativeTarget "ClosetWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89F403DB3DE44D33ED37FC70 /* Debug */,
+				56129989A8C7B7E3C74DB69D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
