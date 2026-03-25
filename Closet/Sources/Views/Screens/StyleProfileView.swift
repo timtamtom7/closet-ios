@@ -7,6 +7,10 @@ struct StyleProfileView: View {
     @State private var monthlyTrendViewModel = MonthlyTrendViewModel()
     @State private var showMonthlyTrend = false
     @State private var showOutfitTimeline = false
+    @State private var showConsultation = false
+    @State private var showGift = false
+    @State private var showExport = false
+    @State private var selectedGiftItem: ClothingItem?
 
     var body: some View {
         NavigationStack {
@@ -29,6 +33,8 @@ struct StyleProfileView: View {
                         }
 
                         summarySection
+
+                        moreOptionsSection
                     }
                 }
                 .padding(.top, 8)
@@ -44,6 +50,27 @@ struct StyleProfileView: View {
             }
             .sheet(isPresented: $showOutfitTimeline) {
                 OutfitTimelineView(outfits: outfitViewModel.outfits, items: wardrobeViewModel.items)
+            }
+            .sheet(isPresented: $showConsultation) {
+                StyleConsultationView()
+            }
+            .sheet(isPresented: $showGift) {
+                GiftView(item: selectedGiftItem) { recipientName, message, itemId in
+                    let itemIds = itemId.flatMap { UUID(uuidString: $0) }.map { [$0] } ?? []
+                    let code = await GiftService.shared.generateGiftCode(
+                        for: itemIds,
+                        senderName: "You",
+                        message: message.isEmpty ? nil : message
+                    )
+                    return code.code
+                }
+            }
+            .sheet(isPresented: $showExport) {
+                ExportView(
+                    items: wardrobeViewModel.items,
+                    outfits: outfitViewModel.outfits,
+                    styleProfile: viewModel.profile
+                )
             }
             .task {
                 await wardrobeViewModel.loadItems()
@@ -209,5 +236,80 @@ struct StyleProfileView: View {
         .background(Color(hex: "#FFFFFF"))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.horizontal, 20)
+    }
+
+    private var moreOptionsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("More")
+                .font(.system(size: 18, weight: .semibold, design: .serif))
+                .foregroundStyle(Color(hex: "#1C1C1E"))
+
+            VStack(spacing: 8) {
+                MoreOptionRow(
+                    icon: "person.2",
+                    title: "Style Consultation",
+                    subtitle: "Book a human stylist — coming soon",
+                    action: { showConsultation = true }
+                )
+
+                MoreOptionRow(
+                    icon: "gift",
+                    title: "Gift Wardrobe Items",
+                    subtitle: "Share items with friends",
+                    action: { selectedGiftItem = nil; showGift = true }
+                )
+
+                MoreOptionRow(
+                    icon: "square.and.arrow.up",
+                    title: "Export Wardrobe",
+                    subtitle: "Download your data as JSON or CSV",
+                    action: { showExport = true }
+                )
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+}
+
+struct MoreOptionRow: View {
+    let icon: String
+    let title: String
+    let subtitle: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(Color(hex: "#B8A898").opacity(0.15))
+                        .frame(width: 40, height: 40)
+
+                    Image(systemName: icon)
+                        .font(.system(size: 16))
+                        .foregroundStyle(Color(hex: "#B8A898"))
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color(hex: "#1C1C1E"))
+
+                    Text(subtitle)
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(hex: "#6E6E73"))
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color(hex: "#E8E8E6"))
+            }
+            .padding(12)
+            .background(Color(hex: "#FFFFFF"))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .buttonStyle(.plain)
     }
 }
