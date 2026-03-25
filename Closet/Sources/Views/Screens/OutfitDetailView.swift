@@ -64,38 +64,7 @@ struct OutfitDetailView: View {
 
                         ForEach(outfit.itemIds, id: \.self) { itemId in
                             if let item = items.first(where: { $0.id == itemId }) {
-                                HStack(spacing: 12) {
-                                    if let image = AsyncImageView(item: item).asImage() {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 56, height: 72)
-                                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    } else {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(Color(hex: "#E8E8E6"))
-                                            .frame(width: 56, height: 72)
-                                            .overlay {
-                                                Image(systemName: item.category.icon)
-                                                    .foregroundStyle(Color(hex: "#6E6E73"))
-                                            }
-                                    }
-
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text(item.name)
-                                            .font(.system(size: 15, weight: .medium))
-                                            .foregroundStyle(Color(hex: "#1C1C1E"))
-
-                                        Text(item.category.rawValue)
-                                            .font(.system(size: 13))
-                                            .foregroundStyle(Color(hex: "#6E6E73"))
-                                    }
-
-                                    Spacer()
-                                }
-                                .padding(12)
-                                .background(Color(hex: "#FFFFFF"))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                ItemDetailRow(item: item)
                             }
                         }
                     }
@@ -179,17 +148,46 @@ struct OutfitDetailThumbnail: View {
     }
 }
 
-extension View {
-    @MainActor
-    func asImage() -> UIImage? {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
-        let targetSize = controller.view.intrinsicContentSize
-        guard targetSize.width > 0 && targetSize.height > 0 else { return nil }
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        return renderer.image { _ in
-            controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+struct ItemDetailRow: View {
+    let item: ClothingItem
+    @State private var image: UIImage?
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Group {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } else {
+                    Rectangle()
+                        .fill(Color(hex: "#E8E8E6"))
+                        .overlay {
+                            Image(systemName: item.category.icon)
+                                .foregroundStyle(Color(hex: "#6E6E73"))
+                        }
+                }
+            }
+            .frame(width: 56, height: 72)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.name)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Color(hex: "#1C1C1E"))
+
+                Text(item.category.rawValue)
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color(hex: "#6E6E73"))
+            }
+
+            Spacer()
+        }
+        .padding(12)
+        .background(Color(hex: "#FFFFFF"))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .task {
+            image = await ImageStorageService.shared.loadImage(path: item.imagePath)
         }
     }
 }
