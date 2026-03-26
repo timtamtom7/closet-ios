@@ -62,7 +62,6 @@ final class ClosetR11Service: ObservableObject {
 
     func shareOutfit(items: [ClosetItem]) -> OutfitPost {
         OutfitPost(
-            id: UUID(),
             items: items,
             reactions: 0,
             comments: 0,
