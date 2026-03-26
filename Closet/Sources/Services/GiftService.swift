@@ -34,7 +34,7 @@ actor GiftService {
     func generateGiftCode(for itemIds: [UUID], senderName: String, message: String?, validDays: Int = 30) -> GiftCode {
         let code = generateRandomCode()
         let now = Date()
-        let expiresAt = Calendar.current.date(byAdding: .day, value: validDays, to: now)!
+        let expiresAt = Calendar.current.date(byAdding: .day, value: validDays, to: now) ?? Date()
 
         return GiftCode(
             code: code,

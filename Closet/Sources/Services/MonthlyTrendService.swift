@@ -35,9 +35,9 @@ actor MonthlyTrendService {
         let calendar = Calendar.current
         let now = Date()
 
-        let thisMonthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
-        let lastMonthStart = calendar.date(byAdding: .month, value: -1, to: thisMonthStart)!
-        let twoMonthsAgoStart = calendar.date(byAdding: .month, value: -2, to: thisMonthStart)!
+        let thisMonthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: now)) ?? Date()
+        let lastMonthStart = calendar.date(byAdding: .month, value: -1, to: thisMonthStart) ?? Date()
+        let twoMonthsAgoStart = calendar.date(byAdding: .month, value: -2, to: thisMonthStart) ?? Date()
 
         let thisMonthItems = items.filter { $0.createdAt >= thisMonthStart }
         let lastMonthItems = items.filter { $0.createdAt >= lastMonthStart && $0.createdAt < thisMonthStart }

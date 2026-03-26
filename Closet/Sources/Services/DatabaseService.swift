@@ -39,7 +39,7 @@ actor DatabaseService {
     private let score = SQLite.Expression<Int>("score")
 
     private init() {
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
         dbPath = documentsPath.appendingPathComponent("closet.sqlite3").path
     }
 

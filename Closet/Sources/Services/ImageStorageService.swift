@@ -21,7 +21,7 @@ actor ImageStorageService {
         }
 
         let filename = "\(UUID().uuidString).jpg"
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
         let imagesDir = documentsPath.appendingPathComponent("ClothingImages", isDirectory: true)
 
         try FileManager.default.createDirectory(at: imagesDir, withIntermediateDirectories: true)
@@ -33,7 +33,7 @@ actor ImageStorageService {
     }
 
     func loadImage(path: String) -> UIImage? {
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
         let fullPath = documentsPath.appendingPathComponent(path)
         return UIImage(contentsOfFile: fullPath.path)
     }
@@ -57,7 +57,7 @@ actor ImageStorageService {
         }
 
         let filename = "\(UUID().uuidString).jpg"
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
         let imagesDir = documentsPath.appendingPathComponent("ClothingImages", isDirectory: true)
 
         try FileManager.default.createDirectory(at: imagesDir, withIntermediateDirectories: true)
@@ -69,14 +69,14 @@ actor ImageStorageService {
     }
 
     func loadImage(path: String) -> NSImage? {
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
         let fullPath = documentsPath.appendingPathComponent(path)
         return NSImage(contentsOf: fullPath)
     }
     #endif
 
     func deleteImage(path: String) throws {
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: NSTemporaryDirectory())
         let fullPath = documentsPath.appendingPathComponent(path)
         try FileManager.default.removeItem(at: fullPath)
     }
