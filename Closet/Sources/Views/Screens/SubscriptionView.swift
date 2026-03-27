@@ -118,7 +118,7 @@ struct SubscriptionView: View {
                     ForEach(tier.features, id: \.self) { feature in
                         HStack(spacing: 8) {
                             Image(systemName: "checkmark")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.system(size: 11, weight: .bold))
                                 .foregroundStyle(Color(hex: "#B8A898"))
 
                             Text(feature)

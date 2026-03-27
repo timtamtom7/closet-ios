@@ -306,6 +306,7 @@ struct OutfitView: View {
                     outfit: current,
                     items: wardrobeViewModel.items,
                     onSave: {
+                        ClosetHaptics.success()
                         Task {
                             await outfitViewModel.saveOutfit(current)
                         }
@@ -314,9 +315,11 @@ struct OutfitView: View {
                         outfitViewModel.advanceSuggestion()
                     },
                     onWhyNot: {
+                        ClosetHaptics.light()
                         showWhyNotSheet = true
                     },
                     onRate: {
+                        ClosetHaptics.medium()
                         showScoreSheet = true
                     }
                 )
@@ -439,7 +442,7 @@ struct OutfitThumbnailSmall: View {
                     .fill(Color(hex: "#E8E8E6"))
                     .overlay {
                         Image(systemName: item.category.icon)
-                            .font(.system(size: 10))
+                            .font(.system(size: 11))
                             .foregroundStyle(Color(hex: "#6E6E73"))
                     }
             }

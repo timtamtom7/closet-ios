@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002ABE5964EA7D2DAF090C2E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816AEE7F18A02F9CDDFF7458 /* Theme.swift */; };
 		006CD850704F93B14B6763D7 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712A873BD5B2CF58171AAFE2 /* ShareSheet.swift */; };
 		0350809730331ED1085B357C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB353DE450F77E0C73E9BC8A /* Enums.swift */; };
 		1A5EAD32ED8DD57A4ECAEFB1 /* ClosetEmptyIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC143CE0446888FF46485917 /* ClosetEmptyIllustration.swift */; };
@@ -94,6 +95,7 @@
 		8045339D80B0F0217BF76179 /* GiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftView.swift; sourceTree = "<group>"; };
 		80E43D9A6EAE6EAF6BBF0D16 /* Closet.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Closet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8124481F499061E88D421F66 /* TravelPackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelPackingView.swift; sourceTree = "<group>"; };
+		816AEE7F18A02F9CDDFF7458 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8313288882499B4963812D89 /* OutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitView.swift; sourceTree = "<group>"; };
 		86736196D18D18A8802689B2 /* TravelPackingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelPackingViewModel.swift; sourceTree = "<group>"; };
 		8E3BE8281902A6B03FF00625 /* StyleConsultationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleConsultationView.swift; sourceTree = "<group>"; };
@@ -154,13 +156,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		1194EF339A16AF459A0D986E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		1637D7D51741E4ACA2B81DED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +180,7 @@
 		6204D75F41F6BAA1E1F01214 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				816AEE7F18A02F9CDDFF7458 /* Theme.swift */,
 				FEFD39F25C97832B571E8042 /* App */,
 				D8E6E510C8876EA9DCADBC3A /* Models */,
 				75899653E30749B240D12874 /* Services */,
@@ -265,17 +261,8 @@
 			children = (
 				2C517CE170C4CF717ED31FB7 /* Info.plist */,
 				FBFA0262D31858DE9D46F656 /* App */,
-				1194EF339A16AF459A0D986E /* Models */,
-				CBCCB1686ED47189A2A37E64 /* Views */,
 			);
 			path = ClosetWatch;
-			sourceTree = "<group>";
-		};
-		CBCCB1686ED47189A2A37E64 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		D8E6E510C8876EA9DCADBC3A /* Models */ = {
@@ -470,6 +457,7 @@
 				EFEF87A322B398496F5A9419 /* StyleStatCard.swift in Sources */,
 				3B76D739BA8880A3581B4C4A /* SubscriptionService.swift in Sources */,
 				2ECFD5BC18EDEF54473835B5 /* SubscriptionView.swift in Sources */,
+				002ABE5964EA7D2DAF090C2E /* Theme.swift in Sources */,
 				2C1025B2ACDE6CF545013590 /* TravelPackingService.swift in Sources */,
 				8C3D97798D96162DA67779DA /* TravelPackingView.swift in Sources */,
 				DB32465D5C5B15975CA5985E /* TravelPackingViewModel.swift in Sources */,

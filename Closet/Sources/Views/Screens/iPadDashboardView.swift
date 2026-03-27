@@ -318,7 +318,7 @@ struct TrailingItemThumbnail: View {
                     .fill(Color(hex: "#E8E8E6"))
                     .overlay {
                         Image(systemName: item.category.icon)
-                            .font(.system(size: 10))
+                            .font(.system(size: 11))
                             .foregroundStyle(Color(hex: "#6E6E73"))
                     }
             }

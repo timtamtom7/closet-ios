@@ -116,7 +116,7 @@ struct MonthGroupView: View {
                             .font(.system(size: 12, weight: .bold))
                             .foregroundStyle(isExpanded ? Color(hex: "#B8A898") : Color(hex: "#6E6E73"))
                         Text(yearString)
-                            .font(.system(size: 10))
+                            .font(.system(size: 11))
                             .foregroundStyle(Color(hex: "#6E6E73"))
                     }
                     .frame(width: 44)
@@ -200,7 +200,7 @@ struct TimelineOutfitRow: View {
 
                     HStack(spacing: 4) {
                         Image(systemName: outfit.eventType.icon)
-                            .font(.system(size: 10))
+                            .font(.system(size: 11))
                         Text(outfit.eventType.rawValue)
                             .font(.system(size: 11))
                             .foregroundStyle(Color(hex: "#6E6E73"))
@@ -243,7 +243,7 @@ struct TimelineThumbnail: View {
                     .fill(Color(hex: "#E8E8E6"))
                     .overlay {
                         Image(systemName: item.category.icon)
-                            .font(.system(size: 10))
+                            .font(.system(size: 11))
                             .foregroundStyle(Color(hex: "#6E6E73"))
                     }
             }

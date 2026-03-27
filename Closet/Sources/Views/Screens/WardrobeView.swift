@@ -163,6 +163,8 @@ struct WardrobeView: View {
         }
         .padding(.trailing, 20)
         .padding(.bottom, 20)
+        .accessibilityLabel("Add clothing item")
+        .accessibilityHint("Opens photo picker to add a new item to your wardrobe")
     }
 }
 
@@ -269,6 +271,7 @@ struct AddItemSheet: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
+                    ClosetHaptics.light()
                     viewModel.resetCaptureState()
                     dismiss()
                 }
@@ -276,6 +279,7 @@ struct AddItemSheet: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
+                    ClosetHaptics.success()
                     Task {
                         await viewModel.saveItem()
                         dismiss()
@@ -357,6 +361,7 @@ struct ItemDetailSheet: View {
                     }
 
                     Button(role: .destructive) {
+                        ClosetHaptics.warning()
                         onDelete()
                         dismiss()
                     } label: {
@@ -380,7 +385,10 @@ struct ItemDetailSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button("Done") {
+                        ClosetHaptics.light()
+                        dismiss()
+                    }
                         .foregroundStyle(Color(hex: "#1C1C1E"))
                 }
             }

@@ -42,131 +42,41 @@ struct OutfitCard: View {
                 .frame(maxWidth: .infinity)
             }
             .frame(height: 200)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.large))
 
             VStack(spacing: 6) {
                 Text(outfit.name)
                     .font(.system(size: 17, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .foregroundStyle(Color.closetPrimaryText)
 
                 HStack(spacing: 8) {
                     Label(outfit.eventType.rawValue, systemImage: outfit.eventType.icon)
                         .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(Color.closetSecondaryText)
 
                     Text("·")
-                        .foregroundStyle(Color(hex: "#E8E8E6"))
+                        .foregroundStyle(Color.closetDivider)
 
                     Label(outfit.weather, systemImage: "cloud.sun.fill")
                         .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(Color.closetSecondaryText)
 
                     if let temp = outfit.temperature {
                         Text("·")
-                            .foregroundStyle(Color(hex: "#E8E8E6"))
+                            .foregroundStyle(Color.closetDivider)
                         Text("\(Int(temp))°C")
                             .font(.system(size: 12))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(Color.closetSecondaryText)
                     }
                 }
             }
 
-            if onWhyNot != nil || onRate != nil {
-                HStack(spacing: 24) {
-                    if let onWhyNot = onWhyNot {
-                        Button {
-                            onWhyNot()
-                        } label: {
-                            VStack(spacing: 4) {
-                                Image(systemName: "hand.thumbsdown.circle.fill")
-                                    .font(.system(size: 36))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
-                                Text("Why not?")
-                                    .font(.system(size: 11))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
-                            }
-                        }
-                    }
-
-                    Button {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                            offset = -300
-                            opacity = 0
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            onDismiss()
-                        }
-                    } label: {
-                        VStack(spacing: 4) {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 44))
-                                .foregroundStyle(Color(hex: "#E8E8E6"))
-                        }
-                    }
-
-                    if let onRate = onRate {
-                        Button {
-                            onRate()
-                        } label: {
-                            VStack(spacing: 4) {
-                                Image(systemName: "star.circle.fill")
-                                    .font(.system(size: 36))
-                                    .foregroundStyle(Color(hex: "#B8A898"))
-                                Text("Rate")
-                                    .font(.system(size: 11))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
-                            }
-                        }
-                    }
-
-                    Button {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                            offset = 0
-                            opacity = 1
-                        }
-                        onSave()
-                    } label: {
-                        VStack(spacing: 4) {
-                            Image(systemName: "heart.circle.fill")
-                                .font(.system(size: 44))
-                                .foregroundStyle(Color(hex: "#B8A898"))
-                        }
-                    }
-                }
-            } else {
-                HStack(spacing: 32) {
-                    Button {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                            offset = -300
-                            opacity = 0
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            onDismiss()
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 44))
-                            .foregroundStyle(Color(hex: "#E8E8E6"))
-                    }
-
-                    Button {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                            offset = 0
-                            opacity = 1
-                        }
-                        onSave()
-                    } label: {
-                        Image(systemName: "heart.circle.fill")
-                            .font(.system(size: 44))
-                            .foregroundStyle(Color(hex: "#B8A898"))
-                    }
-                }
-            }
+            actionButtons
         }
         .padding(20)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color(hex: "#1C1C1E").opacity(0.08), radius: 20, x: 0, y: 8)
+        .background(Color.closetSurface)
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.extraLarge))
+        .shadow(color: Color.closetPrimaryText.opacity(0.08), radius: 20, x: 0, y: 8)
         .offset(x: offset)
         .opacity(opacity)
         .gesture(
@@ -184,6 +94,7 @@ struct OutfitCard: View {
                             onDismiss()
                         }
                     } else if value.translation.width > 100 {
+                        ClosetHaptics.success()
                         onSave()
                         offset = 0
                     } else {
@@ -193,6 +104,115 @@ struct OutfitCard: View {
                     }
                 }
         )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Outfit: \(outfit.name), \(outfit.eventType.rawValue)")
+    }
+
+    @ViewBuilder
+    private var actionButtons: some View {
+        if onWhyNot != nil || onRate != nil {
+            HStack(spacing: 24) {
+                if let onWhyNot = onWhyNot {
+                    Button {
+                        ClosetHaptics.light()
+                        onWhyNot()
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: "hand.thumbsdown.circle.fill")
+                                .font(.system(size: 36))
+                                .foregroundStyle(Color.closetSecondaryText)
+                            Text("Why not?")
+                                .font(ClosetFont.actionLabel)
+                                .foregroundStyle(Color.closetSecondaryText)
+                        }
+                    }
+                    .accessibilityLabel("Why not this outfit")
+                }
+
+                Button {
+                    ClosetHaptics.heavy()
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        offset = -300
+                        opacity = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        onDismiss()
+                    }
+                } label: {
+                    VStack(spacing: 4) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 44))
+                            .foregroundStyle(Color.closetDivider)
+                    }
+                }
+                .accessibilityLabel("Dismiss outfit")
+
+                if let onRate = onRate {
+                    Button {
+                        ClosetHaptics.medium()
+                        onRate()
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: "star.circle.fill")
+                                .font(.system(size: 36))
+                                .foregroundStyle(Color.closetAccent)
+                            Text("Rate")
+                                .font(ClosetFont.actionLabel)
+                                .foregroundStyle(Color.closetSecondaryText)
+                        }
+                    }
+                    .accessibilityLabel("Rate this outfit")
+                }
+
+                Button {
+                    ClosetHaptics.success()
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        offset = 0
+                        opacity = 1
+                    }
+                    onSave()
+                } label: {
+                    VStack(spacing: 4) {
+                        Image(systemName: "heart.circle.fill")
+                            .font(.system(size: 44))
+                            .foregroundStyle(Color.closetAccent)
+                    }
+                }
+                .accessibilityLabel("Save outfit to log")
+            }
+        } else {
+            HStack(spacing: 32) {
+                Button {
+                    ClosetHaptics.heavy()
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        offset = -300
+                        opacity = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        onDismiss()
+                    }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 44))
+                        .foregroundStyle(Color.closetDivider)
+                }
+                .accessibilityLabel("Dismiss outfit")
+
+                Button {
+                    ClosetHaptics.success()
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        offset = 0
+                        opacity = 1
+                    }
+                    onSave()
+                } label: {
+                    Image(systemName: "heart.circle.fill")
+                        .font(.system(size: 44))
+                        .foregroundStyle(Color.closetAccent)
+                }
+                .accessibilityLabel("Save outfit to log")
+            }
+        }
     }
 }
 
@@ -208,15 +228,15 @@ struct OutfitItemThumbnail: View {
                     .aspectRatio(contentMode: .fill)
             } else {
                 Rectangle()
-                    .fill(Color(hex: "#E8E8E6"))
+                    .fill(Color.closetDivider)
                     .overlay {
                         Image(systemName: item.category.icon)
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(Color.closetSecondaryText)
                     }
             }
         }
         .frame(width: 140, height: 200)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
         .task {
             image = await ImageStorageService.shared.loadImage(path: item.imagePath)
         }

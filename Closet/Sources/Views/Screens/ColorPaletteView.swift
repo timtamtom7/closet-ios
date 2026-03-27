@@ -224,7 +224,7 @@ struct ColorPaletteView: View {
                 ForEach(viewModel.analysis.missingColors, id: \.self) { color in
                     HStack(spacing: 4) {
                         Image(systemName: "plus")
-                            .font(.system(size: 10, weight: .bold))
+                            .font(.system(size: 11, weight: .bold))
                         Text(color)
                             .font(.system(size: 13))
                     }

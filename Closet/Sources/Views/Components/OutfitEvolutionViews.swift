@@ -11,40 +11,42 @@ struct WhyNotSheet: View {
                 VStack(spacing: 16) {
                     Text("Why not this outfit?")
                         .font(.system(size: 20, weight: .semibold, design: .serif))
-                        .foregroundStyle(Color(hex: "#1C1C1E"))
+                        .foregroundStyle(Color.closetPrimaryText)
                         .padding(.top, 8)
 
                     Text("Help the AI learn your preferences")
                         .font(.system(size: 14))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(Color.closetSecondaryText)
 
                     VStack(spacing: 10) {
                         ForEach(VetoReason.allCases) { reason in
                             Button {
+                                ClosetHaptics.light()
                                 onVeto(reason)
                                 dismiss()
                             } label: {
                                 HStack(spacing: 12) {
                                     Image(systemName: reason.icon)
                                         .font(.system(size: 18))
-                                        .foregroundStyle(Color(hex: "#B8A898"))
+                                        .foregroundStyle(Color.closetAccent)
                                         .frame(width: 28)
 
                                     Text(reason.rawValue)
                                         .font(.system(size: 16))
-                                        .foregroundStyle(Color(hex: "#1C1C1E"))
+                                        .foregroundStyle(Color.closetPrimaryText)
 
                                     Spacer()
 
                                     Image(systemName: "chevron.right")
                                         .font(.system(size: 14))
-                                        .foregroundStyle(Color(hex: "#E8E8E6"))
+                                        .foregroundStyle(Color.closetDivider)
                                 }
                                 .padding(16)
-                                .background(Color(hex: "#FFFFFF"))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .background(Color.closetSurface)
+                                .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
                             }
                             .buttonStyle(.plain)
+                            .accessibilityLabel("Skip for reason: \(reason.rawValue)")
                         }
                     }
                     .padding(.top, 8)
@@ -52,13 +54,16 @@ struct WhyNotSheet: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
             }
-            .background(Color(hex: "#FAFAF8"))
+            .background(Color.closetBackground)
             .navigationTitle("Skip Outfit")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Cancel") { dismiss() }
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                    Button("Cancel") {
+                        ClosetHaptics.light()
+                        dismiss()
+                    }
+                    .foregroundStyle(Color.closetSecondaryText)
                 }
             }
         }
@@ -76,26 +81,28 @@ struct OutfitScoreSheet: View {
             VStack(spacing: 32) {
                 Text("Rate this outfit")
                     .font(.system(size: 20, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .foregroundStyle(Color.closetPrimaryText)
                     .padding(.top, 16)
 
                 Text("How much do you love this look?")
                     .font(.system(size: 14))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(Color.closetSecondaryText)
 
                 HStack(spacing: 16) {
                     ForEach(1...5, id: \.self) { score in
                         Button {
+                            ClosetHaptics.selection()
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                                 selectedScore = score
                             }
                         } label: {
                             Image(systemName: (selectedScore ?? 0) >= score ? "star.fill" : "star")
                                 .font(.system(size: 36))
-                                .foregroundStyle((selectedScore ?? 0) >= score ? Color(hex: "#B8A898") : Color(hex: "#E8E8E6"))
+                                .foregroundStyle((selectedScore ?? 0) >= score ? Color.closetAccent : Color.closetDivider)
                                 .scaleEffect(selectedScore == score ? 1.2 : 1.0)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityLabel("\(score) star\(score == 1 ? "" : "s")")
                     }
                 }
                 .padding(.vertical, 8)
@@ -103,7 +110,7 @@ struct OutfitScoreSheet: View {
                 if let score = selectedScore {
                     Text(scoreLabel(for: score))
                         .font(.system(size: 15))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(Color.closetSecondaryText)
                         .transition(.opacity)
                 }
 
@@ -111,6 +118,7 @@ struct OutfitScoreSheet: View {
 
                 Button {
                     if let score = selectedScore {
+                        ClosetHaptics.success()
                         onRate(score)
                         dismiss()
                     }
@@ -120,20 +128,24 @@ struct OutfitScoreSheet: View {
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(selectedScore != nil ? Color(hex: "#1C1C1E") : Color(hex: "#E8E8E6"))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .background(selectedScore != nil ? Color.closetPrimaryText : Color.closetDivider)
+                        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.button))
                 }
                 .disabled(selectedScore == nil)
+                .accessibilityLabel("Save rating")
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 40)
-            .background(Color(hex: "#FAFAF8"))
+            .background(Color.closetBackground)
             .navigationTitle("Rate Outfit")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Cancel") { dismiss() }
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                    Button("Cancel") {
+                        ClosetHaptics.light()
+                        dismiss()
+                    }
+                    .foregroundStyle(Color.closetSecondaryText)
                 }
             }
         }
@@ -151,8 +163,6 @@ struct OutfitScoreSheet: View {
     }
 }
 
-import SwiftUI
-
 struct TrendInsightsView: View {
     let insights: [OutfitEvolutionService.TrendInsight]
 
@@ -161,36 +171,43 @@ struct TrendInsightsView: View {
             HStack {
                 Image(systemName: "lightbulb.fill")
                     .font(.system(size: 16))
-                    .foregroundStyle(Color(hex: "#B8A898"))
+                    .foregroundStyle(Color.closetAccent)
                 Text("Style Insights")
                     .font(.system(size: 16, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .foregroundStyle(Color.closetPrimaryText)
             }
 
             ForEach(insights, id: \.message) { insight in
                 HStack(alignment: .top, spacing: 10) {
                     Circle()
-                        .fill(Color(hex: "#B8A898"))
+                        .fill(Color.closetAccent)
                         .frame(width: 6, height: 6)
                         .padding(.top, 6)
 
                     Text(insight.message)
                         .font(.system(size: 14))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(Color.closetSecondaryText)
                         .lineSpacing(2)
                 }
             }
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .background(Color.closetSurface)
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
     }
 }
 
 struct TemperatureLayeringView: View {
     let suggestions: [String]
     let temperature: Double
+
+    private var temperatureColor: Color {
+        if temperature < 10 { return Color(hex: "#1166AA") }
+        if temperature < 15 { return Color.closetSecondaryText }
+        if temperature < 25 { return Color.closetAccent }
+        return Color.closetError
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -201,33 +218,26 @@ struct TemperatureLayeringView: View {
 
                 Text("Layering Tips")
                     .font(.system(size: 16, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .foregroundStyle(Color.closetPrimaryText)
             }
 
             ForEach(suggestions, id: \.self) { suggestion in
                 HStack(alignment: .top, spacing: 10) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 14))
-                        .foregroundStyle(Color(hex: "#B8A898"))
+                        .foregroundStyle(Color.closetAccent)
                         .padding(.top, 1)
 
                     Text(suggestion)
                         .font(.system(size: 14))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(Color.closetSecondaryText)
                 }
             }
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-    }
-
-    private var temperatureColor: Color {
-        if temperature < 10 { return Color(hex: "#1166AA") }
-        if temperature < 15 { return Color(hex: "#6E6E73") }
-        if temperature < 25 { return Color(hex: "#B8A898") }
-        return Color(hex: "#C45C4A")
+        .background(Color.closetSurface)
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
     }
 }
 
@@ -240,16 +250,16 @@ struct SeasonTransitionView: View {
             HStack {
                 Image(systemName: "calendar.badge.clock")
                     .font(.system(size: 16))
-                    .foregroundStyle(Color(hex: "#B8A898"))
+                    .foregroundStyle(Color.closetAccent)
                 Text("Upcoming Weather")
                     .font(.system(size: 16, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .foregroundStyle(Color.closetPrimaryText)
             }
 
             if forecasts.isEmpty {
                 Text("No forecast available")
                     .font(.system(size: 14))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(Color.closetSecondaryText)
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
@@ -257,20 +267,20 @@ struct SeasonTransitionView: View {
                             VStack(spacing: 6) {
                                 Text(dayName(from: day.date))
                                     .font(.system(size: 12, weight: .medium))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                    .foregroundStyle(Color.closetSecondaryText)
 
                                 Image(systemName: day.icon)
                                     .font(.system(size: 20))
-                                    .foregroundStyle(Color(hex: "#B8A898"))
+                                    .foregroundStyle(Color.closetAccent)
 
                                 Text("\(Int(day.avgTemp))°")
                                     .font(.system(size: 15, weight: .semibold))
-                                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                                    .foregroundStyle(Color.closetPrimaryText)
                             }
                             .frame(width: 60)
                             .padding(.vertical, 12)
-                            .background(Color(hex: "#FAFAF8"))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .background(Color.closetBackground)
+                            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.button))
                         }
                     }
                 }
@@ -279,19 +289,19 @@ struct SeasonTransitionView: View {
                     HStack(alignment: .top, spacing: 10) {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .font(.system(size: 14))
-                            .foregroundStyle(Color(hex: "#C45C4A"))
+                            .foregroundStyle(Color.closetError)
 
                         Text("Cold snap ahead (\(Int(coldDay.avgTemp))° on \(dayName(from: coldDay.date))). Pull forward your warmest pieces.")
                             .font(.system(size: 13))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(Color.closetSecondaryText)
                     }
                 }
             }
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .background(Color.closetSurface)
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
     }
 
     private func dayName(from date: Date) -> String {

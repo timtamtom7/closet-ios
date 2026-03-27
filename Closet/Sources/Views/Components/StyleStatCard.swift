@@ -12,27 +12,27 @@ struct StyleStatCard: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .font(.system(size: 13, weight: .regular, design: .default))
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(Color.closetSecondaryText)
                 .textCase(.uppercase)
                 .tracking(1.2)
 
             Text(value)
                 .font(.system(size: 40, weight: .bold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .foregroundStyle(Color.closetPrimaryText)
 
             Text(subtitle)
                 .font(.system(size: 13, weight: .regular, design: .default))
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(Color.closetSecondaryText)
 
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     Rectangle()
-                        .fill(Color(hex: "#E8E8E6"))
+                        .fill(Color.closetDivider)
                         .frame(height: 4)
                         .clipShape(Capsule())
 
                     Rectangle()
-                        .fill(Color(hex: "#B8A898"))
+                        .fill(Color.closetAccent)
                         .frame(width: geo.size.width * animatedProgress, height: 4)
                         .clipShape(Capsule())
                 }
@@ -41,9 +41,9 @@ struct StyleStatCard: View {
         }
         .padding(16)
         .frame(width: 140, height: 160)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(color: Color(hex: "#1C1C1E").opacity(0.05), radius: 8, x: 0, y: 4)
+        .background(Color.closetSurface)
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
+        .shadow(color: Color.closetPrimaryText.opacity(0.05), radius: 8, x: 0, y: 4)
         .onAppear {
             withAnimation(.easeOut(duration: 0.8)) {
                 animatedProgress = progress

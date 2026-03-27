@@ -284,17 +284,17 @@ struct ColorTrendRow: View {
         HStack(spacing: 2) {
             if trend.isIncrease {
                 Image(systemName: "arrow.up")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 11, weight: .bold))
                 Text("\(Int(trend.changePercent))%")
                     .font(.system(size: 12, weight: .semibold))
             } else if trend.isFading {
                 Image(systemName: "arrow.down")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 11, weight: .bold))
                 Text("\(Int(trend.changePercent))%")
                     .font(.system(size: 12, weight: .semibold))
             } else {
                 Image(systemName: "equal")
-                    .font(.system(size: 10))
+                    .font(.system(size: 11))
                 Text("—")
                     .font(.system(size: 12))
             }

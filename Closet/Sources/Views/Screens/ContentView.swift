@@ -55,6 +55,9 @@ struct ContentView: View {
                 .tag(4)
         }
         .tint(Color(hex: "#1C1C1E"))
+        .onChange(of: selectedTab) { _, _ in
+            ClosetHaptics.selection()
+        }
     }
 
     private var iPadContentView: some View {
