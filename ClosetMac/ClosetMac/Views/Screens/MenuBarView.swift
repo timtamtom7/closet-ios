@@ -9,6 +9,7 @@ struct MenuBarView: View {
     enum MenuTab: String, CaseIterable {
         case overview = "Wardrobe"
         case outfits = "Outfits"
+        case style = "Style"
         case log = "Log"
         case settings = "Settings"
     }
@@ -48,6 +49,8 @@ struct MenuBarView: View {
                     ClosetOverviewView(dataService: dataService)
                 case .outfits:
                     OutfitBuilderView(dataService: dataService)
+                case .style:
+                    StyleView(dataService: dataService)
                 case .log:
                     WornLogView(dataService: dataService)
                 case .settings:
@@ -63,6 +66,7 @@ struct MenuBarView: View {
         switch tab {
         case .overview: return "tshirt"
         case .outfits: return "square.grid.2x2"
+        case .style: return "wand.and.stars"
         case .log: return "calendar"
         case .settings: return "gearshape"
         }
