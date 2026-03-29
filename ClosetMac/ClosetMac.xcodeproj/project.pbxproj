@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		223E393D19F7E8CA4E3AA267 /* ClosetOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04FE0394057DA96947AD0B /* ClosetOverviewView.swift */; };
+		33ABB41AD0F82B5E0515FE4B /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B19E95A8803AD0AC5D533 /* Enums.swift */; };
+		414898D43D25DDC94A2D2AC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C1BFEAC80E85041C89190 /* AppDelegate.swift */; };
+		434F19B3A25A5A07981A0F31 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A665A6B4F490ED07831330E /* MenuBarView.swift */; };
+		5A045B1E9D938E1F37B2BD9C /* WornLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA7B5EBB10AF75A2D17EBF3 /* WornLogView.swift */; };
+		5E393873DE32FE857B75A504 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5145099E393F28B845258A1 /* ClothingItem.swift */; };
+		6284184BD9D8E3A8488733AC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95EE3793C9597A7A6CE57C3 /* main.swift */; };
+		92DDBC382D4DA221C71DC648 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EF462AF7F93CCA9B63119D /* SettingsView.swift */; };
+		AC26D629620805ADC1488878 /* OutfitBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516402C3A5CDF3011D84D5D /* OutfitBuilderView.swift */; };
+		C45075E48AA9C5A6484FB49A /* ClosetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CF2DE9B05B781EDFB0298 /* ClosetDataService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A665A6B4F490ED07831330E /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		7A69F850B811ED68DED9C75B /* ClosetMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosetMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99733A7233E30DF300C3515E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9F3CF2DE9B05B781EDFB0298 /* ClosetDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetDataService.swift; sourceTree = "<group>"; };
+		ADA7B5EBB10AF75A2D17EBF3 /* WornLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WornLogView.swift; sourceTree = "<group>"; };
+		C5145099E393F28B845258A1 /* ClothingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
+		CE4B19E95A8803AD0AC5D533 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		D1EF462AF7F93CCA9B63119D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DC04FE0394057DA96947AD0B /* ClosetOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetOverviewView.swift; sourceTree = "<group>"; };
+		E22C1BFEAC80E85041C89190 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E516402C3A5CDF3011D84D5D /* OutfitBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitBuilderView.swift; sourceTree = "<group>"; };
+		E95EE3793C9597A7A6CE57C3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1CB68A93D47579A4DBB6783D /* ClosetMac */ = {
+			isa = PBXGroup;
+			children = (
+				99733A7233E30DF300C3515E /* Info.plist */,
+				CE7C7FC89314AAAEBA708AB6 /* App */,
+				4EE5EB6F6F858436A92EAE44 /* Models */,
+				5DA1CDF1B29BF31B24D9DE16 /* Services */,
+				4D13AD25DF79206E40E9E736 /* Views */,
+			);
+			path = ClosetMac;
+			sourceTree = "<group>";
+		};
+		3798805CC6468F225D99C94E = {
+			isa = PBXGroup;
+			children = (
+				1CB68A93D47579A4DBB6783D /* ClosetMac */,
+				7C2AF3C9216A2895E592AE7A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4D13AD25DF79206E40E9E736 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB9C9ACD284AB94A488BD3CE /* Screens */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4EE5EB6F6F858436A92EAE44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C5145099E393F28B845258A1 /* ClothingItem.swift */,
+				CE4B19E95A8803AD0AC5D533 /* Enums.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5DA1CDF1B29BF31B24D9DE16 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9F3CF2DE9B05B781EDFB0298 /* ClosetDataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7C2AF3C9216A2895E592AE7A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A69F850B811ED68DED9C75B /* ClosetMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB9C9ACD284AB94A488BD3CE /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				DC04FE0394057DA96947AD0B /* ClosetOverviewView.swift */,
+				1A665A6B4F490ED07831330E /* MenuBarView.swift */,
+				E516402C3A5CDF3011D84D5D /* OutfitBuilderView.swift */,
+				D1EF462AF7F93CCA9B63119D /* SettingsView.swift */,
+				ADA7B5EBB10AF75A2D17EBF3 /* WornLogView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CE7C7FC89314AAAEBA708AB6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E22C1BFEAC80E85041C89190 /* AppDelegate.swift */,
+				E95EE3793C9597A7A6CE57C3 /* main.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C1F808A5837B5E220FD53A3 /* ClosetMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32EFFEF065E3D131E1A1D755 /* Build configuration list for PBXNativeTarget "ClosetMac" */;
+			buildPhases = (
+				4E1F65D53FEA643FA26584DF /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClosetMac;
+			productName = ClosetMac;
+			productReference = 7A69F850B811ED68DED9C75B /* ClosetMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68429DAD8A32724C09C27BDD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0C1F808A5837B5E220FD53A3 = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = E5EBFF0ACA2271E8550DEFCD /* Build configuration list for PBXProject "ClosetMac" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 3798805CC6468F225D99C94E;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C1F808A5837B5E220FD53A3 /* ClosetMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E1F65D53FEA643FA26584DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414898D43D25DDC94A2D2AC8 /* AppDelegate.swift in Sources */,
+				C45075E48AA9C5A6484FB49A /* ClosetDataService.swift in Sources */,
+				223E393D19F7E8CA4E3AA267 /* ClosetOverviewView.swift in Sources */,
+				5E393873DE32FE857B75A504 /* ClothingItem.swift in Sources */,
+				33ABB41AD0F82B5E0515FE4B /* Enums.swift in Sources */,
+				434F19B3A25A5A07981A0F31 /* MenuBarView.swift in Sources */,
+				AC26D629620805ADC1488878 /* OutfitBuilderView.swift in Sources */,
+				92DDBC382D4DA221C71DC648 /* SettingsView.swift in Sources */,
+				5A045B1E9D938E1F37B2BD9C /* WornLogView.swift in Sources */,
+				6284184BD9D8E3A8488733AC /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1505D091DBA86F7E831A62CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ClosetMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tommaso.closet.mac;
+				PRODUCT_NAME = Closet;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		6FD4FD54239AB6F12B861984 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		77C917261C079FA46C58B61F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ClosetMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tommaso.closet.mac;
+				PRODUCT_NAME = Closet;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		F4507F50C95EA0194E5ABE69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32EFFEF065E3D131E1A1D755 /* Build configuration list for PBXNativeTarget "ClosetMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77C917261C079FA46C58B61F /* Debug */,
+				1505D091DBA86F7E831A62CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E5EBFF0ACA2271E8550DEFCD /* Build configuration list for PBXProject "ClosetMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FD4FD54239AB6F12B861984 /* Debug */,
+				F4507F50C95EA0194E5ABE69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68429DAD8A32724C09C27BDD /* Project object */;
+}
