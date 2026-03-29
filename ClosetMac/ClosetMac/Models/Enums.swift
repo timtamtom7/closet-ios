@@ -12,6 +12,7 @@ enum Theme {
     static let mist = Color(hex: "E8E8E6")
     static let sand = Color(hex: "D4C5B5")
     static let ivory = Color(hex: "FAFAF8")
+    static let priorityHigh = Color(hex: "C45C4A")
 }
 
 enum ClothingCategory: String, CaseIterable, Identifiable, Codable {

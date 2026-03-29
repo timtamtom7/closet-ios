@@ -251,7 +251,7 @@ struct WishListItemRow: View {
 
     private var priorityColor: Color {
         switch item.priority {
-        case .high: return Color(hex: "C45C4A")
+        case .high: return Theme.priorityHigh
         case .medium: return Theme.sand
         case .low: return Theme.sage
         }
