@@ -8,6 +8,7 @@ class ClosetDataService: ObservableObject {
     @Published var clothingItems: [ClothingItem] = []
     @Published var outfits: [Outfit] = []
     @Published var wornEntries: [WornEntry] = []
+    @Published var wishListItems: [WishListItem] = []
     @Published var styleProfile: StyleProfile = StyleProfile()
 
     private let fileManager = FileManager.default
@@ -28,6 +29,7 @@ class ClosetDataService: ObservableObject {
         clothingItems = loadClothingItems()
         outfits = loadOutfits()
         wornEntries = loadWornEntries()
+        wishListItems = loadWishListItems()
         updateStyleProfile()
     }
 
@@ -162,6 +164,10 @@ class ClosetDataService: ObservableObject {
         imagesDirectory.appendingPathComponent("worn_entries.json")
     }
 
+    private var wishListURL: URL {
+        imagesDirectory.appendingPathComponent("wish_list.json")
+    }
+
     private func loadClothingItems() -> [ClothingItem] {
         guard let data = try? Data(contentsOf: clothingItemsURL),
               let items = try? JSONDecoder().decode([ClothingItem].self, from: data) else {
@@ -184,6 +190,29 @@ class ClosetDataService: ObservableObject {
             return []
         }
         return items
+    }
+
+    private func loadWishListItems() -> [WishListItem] {
+        guard let data = try? Data(contentsOf: wishListURL),
+              let items = try? JSONDecoder().decode([WishListItem].self, from: data) else {
+            return []
+        }
+        return items
+    }
+
+    private func persistWishList() {
+        guard let data = try? JSONEncoder().encode(wishListItems) else { return }
+        try? data.write(to: wishListURL)
+    }
+
+    func addWishListItem(_ item: WishListItem) {
+        wishListItems.insert(item, at: 0)
+        persistWishList()
+    }
+
+    func deleteWishListItem(_ item: WishListItem) {
+        wishListItems.removeAll { $0.id == item.id }
+        persistWishList()
     }
 
     private func persistClothingItems() {

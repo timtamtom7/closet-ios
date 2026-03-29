@@ -90,3 +90,46 @@ struct StyleProfile {
     var mostWornItem: ClothingItem?
     var leastWornItem: ClothingItem?
 }
+
+struct WishListItem: Identifiable, Codable, Hashable {
+    var id: UUID
+    var name: String
+    var category: ClothingCategory
+    var estimatedPrice: String?
+    var storeName: String?
+    var priority: WishListPriority
+    var notes: String?
+    var dominantColors: [String]
+    var tags: [String]
+    var createdAt: Date
+
+    enum WishListPriority: String, CaseIterable, Codable {
+        case high = "High"
+        case medium = "Medium"
+        case low = "Low"
+    }
+
+    init(
+        id: UUID = UUID(),
+        name: String,
+        category: ClothingCategory,
+        estimatedPrice: String? = nil,
+        storeName: String? = nil,
+        priority: WishListPriority = .medium,
+        notes: String? = nil,
+        dominantColors: [String] = [],
+        tags: [String] = [],
+        createdAt: Date = Date()
+    ) {
+        self.id = id
+        self.name = name
+        self.category = category
+        self.estimatedPrice = estimatedPrice
+        self.storeName = storeName
+        self.priority = priority
+        self.notes = notes
+        self.dominantColors = dominantColors
+        self.tags = tags
+        self.createdAt = createdAt
+    }
+}

@@ -13,19 +13,23 @@
 		33ABB41AD0F82B5E0515FE4B /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B19E95A8803AD0AC5D533 /* Enums.swift */; };
 		414898D43D25DDC94A2D2AC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C1BFEAC80E85041C89190 /* AppDelegate.swift */; };
 		434F19B3A25A5A07981A0F31 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A665A6B4F490ED07831330E /* MenuBarView.swift */; };
+		495DF563C5E81E1B2C9523AB /* WishListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE430B4EE3F2A2B08BA6C4 /* WishListView.swift */; };
 		5A045B1E9D938E1F37B2BD9C /* WornLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA7B5EBB10AF75A2D17EBF3 /* WornLogView.swift */; };
 		5E393873DE32FE857B75A504 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5145099E393F28B845258A1 /* ClothingItem.swift */; };
 		6284184BD9D8E3A8488733AC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95EE3793C9597A7A6CE57C3 /* main.swift */; };
 		865FD17C31EF9F9E8E87B742 /* StyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E609B5D6013C1F5F6BBA37 /* StyleView.swift */; };
 		92DDBC382D4DA221C71DC648 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EF462AF7F93CCA9B63119D /* SettingsView.swift */; };
+		A9F5CF13F0D35097EE9C974F /* ClosetSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52E95F8CA70C7A200EAAC3 /* ClosetSharingService.swift */; };
 		AC26D629620805ADC1488878 /* OutfitBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516402C3A5CDF3011D84D5D /* OutfitBuilderView.swift */; };
 		B0378458613308D3F5CC0741 /* WardrobeInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AAD7091E822A14DC85ECAA /* WardrobeInsightsView.swift */; };
 		C45075E48AA9C5A6484FB49A /* ClosetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CF2DE9B05B781EDFB0298 /* ClosetDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00DE430B4EE3F2A2B08BA6C4 /* WishListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListView.swift; sourceTree = "<group>"; };
 		06AAD7091E822A14DC85ECAA /* WardrobeInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeInsightsView.swift; sourceTree = "<group>"; };
 		1A665A6B4F490ED07831330E /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		2C52E95F8CA70C7A200EAAC3 /* ClosetSharingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetSharingService.swift; sourceTree = "<group>"; };
 		6011A8729B6D0AF018214EDC /* WeatherStylingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStylingView.swift; sourceTree = "<group>"; };
 		7A69F850B811ED68DED9C75B /* ClosetMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosetMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99733A7233E30DF300C3515E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				9F3CF2DE9B05B781EDFB0298 /* ClosetDataService.swift */,
+				2C52E95F8CA70C7A200EAAC3 /* ClosetSharingService.swift */,
 				AB8F664EDB26BAC53DC98DB6 /* StyleAIService.swift */,
 			);
 			path = Services;
@@ -96,6 +101,7 @@
 				A4E609B5D6013C1F5F6BBA37 /* StyleView.swift */,
 				06AAD7091E822A14DC85ECAA /* WardrobeInsightsView.swift */,
 				6011A8729B6D0AF018214EDC /* WeatherStylingView.swift */,
+				00DE430B4EE3F2A2B08BA6C4 /* WishListView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 				414898D43D25DDC94A2D2AC8 /* AppDelegate.swift in Sources */,
 				C45075E48AA9C5A6484FB49A /* ClosetDataService.swift in Sources */,
 				223E393D19F7E8CA4E3AA267 /* ClosetOverviewView.swift in Sources */,
+				A9F5CF13F0D35097EE9C974F /* ClosetSharingService.swift in Sources */,
 				5E393873DE32FE857B75A504 /* ClothingItem.swift in Sources */,
 				33ABB41AD0F82B5E0515FE4B /* Enums.swift in Sources */,
 				434F19B3A25A5A07981A0F31 /* MenuBarView.swift in Sources */,
@@ -195,6 +202,7 @@
 				865FD17C31EF9F9E8E87B742 /* StyleView.swift in Sources */,
 				B0378458613308D3F5CC0741 /* WardrobeInsightsView.swift in Sources */,
 				2CD91661B8291901453B0BD1 /* WeatherStylingView.swift in Sources */,
+				495DF563C5E81E1B2C9523AB /* WishListView.swift in Sources */,
 				5A045B1E9D938E1F37B2BD9C /* WornLogView.swift in Sources */,
 				6284184BD9D8E3A8488733AC /* main.swift in Sources */,
 			);

@@ -10,6 +10,7 @@ struct MenuBarView: View {
         case overview = "Wardrobe"
         case outfits = "Outfits"
         case style = "Style"
+        case wishList = "Wish List"
         case log = "Log"
         case settings = "Settings"
     }
@@ -51,6 +52,8 @@ struct MenuBarView: View {
                     OutfitBuilderView(dataService: dataService)
                 case .style:
                     StyleView(dataService: dataService)
+                case .wishList:
+                    WishListView(dataService: dataService)
                 case .log:
                     WornLogView(dataService: dataService)
                 case .settings:
@@ -67,6 +70,7 @@ struct MenuBarView: View {
         case .overview: return "tshirt"
         case .outfits: return "square.grid.2x2"
         case .style: return "wand.and.stars"
+        case .wishList: return "star"
         case .log: return "calendar"
         case .settings: return "gearshape"
         }
