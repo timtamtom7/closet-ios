@@ -38,6 +38,8 @@ actor WeatherService {
     }
 
     func fetchWeather(latitude: Double = 37.7749, longitude: Double = -122.4194) async throws -> WeatherInfo {
+        // TODO: Integrate WeatherKit with CoreLocation for real weather
+        // wttr.in is a third-party API with no SLA - replace before shipping
         let urlString = "https://wttr.in/?format=j1"
         guard let url = URL(string: urlString) else {
             throw WeatherError.invalidURL

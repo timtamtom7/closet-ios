@@ -52,6 +52,7 @@ final class OutfitViewModel {
             currentWeather = try await WeatherService.shared.fetchWeather()
             await loadLayeringSuggestions()
         } catch {
+            print("Weather fetch failed: \(error.localizedDescription)")
             currentWeather = WeatherService.WeatherInfo(condition: "Clear", temperature: 20, icon: "sun.max.fill")
         }
     }
@@ -100,6 +101,13 @@ final class OutfitViewModel {
             temperature: temp,
             count: 5
         )
+
+        // Filter out vetoed outfits from suggestions
+        let vetoedOutfitIds = Set(vetoes.map { $0.outfitId })
+        suggestedOutfits = suggestedOutfits.filter { outfit in
+            !vetoedOutfitIds.contains(outfit.id)
+        }
+
         currentSuggestionIndex = 0
         await loadTrends(items: items)
     }

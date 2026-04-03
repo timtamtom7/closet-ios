@@ -1,0 +1,23 @@
+{
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Services/OutfitEvolutionService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionService.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionService.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Services/OutfitGeneratorService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitGeneratorService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitGeneratorService.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitGeneratorService.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitGeneratorService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitGeneratorService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Components/OutfitEvolutionViews.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionViews.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionViews.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionViews.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionViews.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitEvolutionViews.swiftdeps"
+  }
+}

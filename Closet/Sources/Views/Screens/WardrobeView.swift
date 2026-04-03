@@ -3,6 +3,7 @@ import PhotosUI
 
 struct WardrobeView: View {
     @State private var viewModel = WardrobeViewModel()
+    @State private var cameraPhotoItem: PhotosPickerItem?
     @State private var columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -46,14 +47,14 @@ struct WardrobeView: View {
 
                 cameraButton
             }
-            .background(Color(hex: "#FAFAF8"))
+            .background(ClosetDesign.Colors.background)
             .navigationTitle("Wardrobe")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Text("\(viewModel.items.count) pieces")
                         .font(.system(size: 13))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 }
             }
             .sheet(isPresented: $viewModel.showingAddItem) {
@@ -78,6 +79,11 @@ struct WardrobeView: View {
                 matching: .images
             )
             .onChange(of: viewModel.selectedPhotoItem) { _, newValue in
+                Task {
+                    await viewModel.processSelectedPhoto(newValue)
+                }
+            }
+            .onChange(of: cameraPhotoItem) { _, newValue in
                 Task {
                     await viewModel.processSelectedPhoto(newValue)
                 }
@@ -109,19 +115,7 @@ struct WardrobeView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 20) {
-            Spacer()
-            ClosetEmptyIllustration(size: 180)
-            Text("Your wardrobe is empty")
-                .font(.system(size: 22, weight: .semibold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
-            Text("Tap the camera button below to add your first piece")
-                .font(.system(size: 15))
-                .foregroundStyle(Color(hex: "#6E6E73"))
-                .multilineTextAlignment(.center)
-            Spacer()
-        }
-        .padding(.horizontal, 40)
+        EmptyWardrobeView()
     }
 
     private func errorState(message: String) -> some View {
@@ -129,13 +123,13 @@ struct WardrobeView: View {
             Spacer()
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 48))
-                .foregroundStyle(Color(hex: "#C45C4A"))
+                .foregroundStyle(ClosetDesign.Colors.error)
             Text("Something went wrong")
-                .font(.system(size: 20, weight: .semibold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .font(ClosetDesign.Typography.sectionTitle)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
             Text(message)
                 .font(.system(size: 14))
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 .multilineTextAlignment(.center)
             Button("Try Again") {
                 Task { await viewModel.loadItems() }
@@ -144,25 +138,35 @@ struct WardrobeView: View {
             .foregroundStyle(.white)
             .padding(.horizontal, 24)
             .padding(.vertical, 10)
-            .background(Color(hex: "#1C1C1E"))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .background(ClosetDesign.Colors.primaryText)
+            .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
             Spacer()
         }
         .padding(.horizontal, 40)
     }
 
     private var cameraButton: some View {
-        PhotosPicker(selection: $viewModel.selectedPhotoItem, matching: .images) {
+        PhotosPicker(selection: $cameraPhotoItem, matching: .images) {
             Image(systemName: "camera.fill")
                 .font(.system(size: 20, weight: .medium))
                 .foregroundStyle(.white)
                 .frame(width: 56, height: 56)
-                .background(Color(hex: "#1C1C1E"))
+                .background(ClosetDesign.Colors.primaryText)
                 .clipShape(Circle())
-                .shadow(color: Color(hex: "#1C1C1E").opacity(0.3), radius: 10, x: 0, y: 4)
+                .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.3), radius: 10, x: 0, y: 4)
         }
+        .buttonStyle(ScaleButtonStyle())
         .padding(.trailing, 20)
         .padding(.bottom, 20)
+    }
+}
+
+struct ScaleButtonStyle: ButtonStyle {
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.94 : 1.0)
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 
@@ -178,10 +182,10 @@ struct AddItemSheet: View {
                         .scaleEffect(1.5)
                     Text("Analyzing your item...")
                         .font(.system(size: 15))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(hex: "#FAFAF8"))
+                .background(ClosetDesign.Colors.background)
             } else {
                 ScrollView {
                     VStack(spacing: 24) {
@@ -190,27 +194,27 @@ struct AddItemSheet: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(maxHeight: 300)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.image))
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Name")
                                 .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
+                                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                             TextField("Item name", text: $viewModel.itemName)
                                 .font(.system(size: 17))
                                 .padding(12)
-                                .background(Color(hex: "#FAFAF8"))
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .background(ClosetDesign.Colors.background)
+                                .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                                 .overlay {
-                                    RoundedRectangle(cornerRadius: 8).stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: ClosetDesign.Radius.button).stroke(ClosetDesign.Colors.divider, lineWidth: 1)
                                 }
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Category")
                                 .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
+                                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                             Picker("Category", selection: Binding(
                                 get: { viewModel.detectedCategory ?? .unknown },
                                 set: { viewModel.detectedCategory = $0 }
@@ -226,14 +230,14 @@ struct AddItemSheet: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Detected Colors")
                                     .font(.system(size: 13, weight: .medium))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                                 HStack(spacing: 8) {
                                     ForEach(viewModel.detectedColors, id: \.self) { color in
                                         Circle()
                                             .fill(Color(hex: color))
                                             .frame(width: 28, height: 28)
                                             .overlay {
-                                                Circle().stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                                                Circle().stroke(ClosetDesign.Colors.divider, lineWidth: 1)
                                             }
                                     }
                                 }
@@ -244,15 +248,15 @@ struct AddItemSheet: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Tags")
                                     .font(.system(size: 13, weight: .medium))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                                 FlowLayout(spacing: 6) {
                                     ForEach(viewModel.detectedTags, id: \.self) { tag in
                                         Text(tag)
                                             .font(.system(size: 12))
-                                            .foregroundStyle(Color(hex: "#6E6E73"))
+                                            .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                                             .padding(.horizontal, 10)
                                             .padding(.vertical, 4)
-                                            .background(Color(hex: "#E8E8E6"))
+                                            .background(ClosetDesign.Colors.divider)
                                             .clipShape(Capsule())
                                     }
                                 }
@@ -261,7 +265,7 @@ struct AddItemSheet: View {
                     }
                     .padding(20)
                 }
-                .background(Color(hex: "#FAFAF8"))
+                .background(ClosetDesign.Colors.background)
             }
         }
         .navigationTitle("Add Item")
@@ -272,7 +276,7 @@ struct AddItemSheet: View {
                     viewModel.resetCaptureState()
                     dismiss()
                 }
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
@@ -282,7 +286,7 @@ struct AddItemSheet: View {
                     }
                 }
                 .fontWeight(.semibold)
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
             }
         }
     }
@@ -303,24 +307,24 @@ struct ItemDetailSheet: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(maxHeight: 350)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.image))
                     }
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text(item.name)
-                            .font(.system(size: 28, weight: .bold, design: .serif))
-                            .foregroundStyle(Color(hex: "#1C1C1E"))
+                            .font(ClosetDesign.Typography.heading1)
+                            .foregroundStyle(ClosetDesign.Colors.primaryText)
 
                         HStack {
                             Label(item.category.rawValue, systemImage: item.category.icon)
                                 .font(.system(size: 14))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
+                                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
 
                             Spacer()
 
                             Text("Worn \(item.wearCount) time\(item.wearCount == 1 ? "" : "s")")
                                 .font(.system(size: 14))
-                                .foregroundStyle(Color(hex: "#B8A898"))
+                                .foregroundStyle(ClosetDesign.Colors.accent)
                         }
                     }
 
@@ -328,14 +332,14 @@ struct ItemDetailSheet: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Colors")
                                 .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
+                                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                             HStack(spacing: 8) {
                                 ForEach(item.dominantColors, id: \.self) { color in
                                     Circle()
                                         .fill(Color(hex: color))
                                         .frame(width: 32, height: 32)
                                         .overlay {
-                                            Circle().stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                                            Circle().stroke(ClosetDesign.Colors.divider, lineWidth: 1)
                                         }
                                 }
                             }
@@ -347,10 +351,10 @@ struct ItemDetailSheet: View {
                             ForEach(item.tags, id: \.self) { tag in
                                 Text(tag)
                                     .font(.system(size: 13))
-                                    .foregroundStyle(Color(hex: "#6E6E73"))
+                                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
-                                    .background(Color(hex: "#E8E8E6"))
+                                    .background(ClosetDesign.Colors.divider)
                                     .clipShape(Capsule())
                             }
                         }
@@ -362,26 +366,26 @@ struct ItemDetailSheet: View {
                     } label: {
                         Label("Delete Item", systemImage: "trash")
                             .font(.system(size: 15, weight: .medium))
-                            .foregroundStyle(Color(hex: "#C45C4A"))
+                            .foregroundStyle(ClosetDesign.Colors.error)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(Color(hex: "#FAFAF8"))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .background(ClosetDesign.Colors.background)
+                            .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                             .overlay {
-                                RoundedRectangle(cornerRadius: 10).stroke(Color(hex: "#C45C4A").opacity(0.3), lineWidth: 1)
+                                RoundedRectangle(cornerRadius: ClosetDesign.Radius.button).stroke(ClosetDesign.Colors.error.opacity(0.3), lineWidth: 1)
                             }
                     }
                     .padding(.top, 8)
                 }
                 .padding(20)
             }
-            .background(Color(hex: "#FAFAF8"))
+            .background(ClosetDesign.Colors.background)
             .navigationTitle("Item Detail")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(Color(hex: "#1C1C1E"))
+                        .foregroundStyle(ClosetDesign.Colors.primaryText)
                 }
             }
             .task {
@@ -395,7 +399,8 @@ struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let result = FlowResult(in: proposal.width ?? 0, subviews: subviews, spacing: spacing)
+        let width = proposal.width ?? 300 // minimum sensible width
+        let result = FlowResult(in: width, subviews: subviews, spacing: spacing)
         return result.size
     }
 
@@ -429,6 +434,32 @@ struct FlowLayout: Layout {
                 x += size.width + spacing
             }
             self.size = CGSize(width: width, height: y + lineHeight)
+        }
+    }
+}
+
+struct EmptyWardrobeView: View {
+    @State private var opacity: Double = 0
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Spacer()
+            ClosetEmptyIllustration(size: 180)
+            Text("Your wardrobe is empty")
+                .font(ClosetDesign.Typography.sectionTitle)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
+            Text("Tap the camera button below to add your first piece")
+                .font(.system(size: 15))
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
+                .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .padding(.horizontal, 40)
+        .opacity(opacity)
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.3)) {
+                opacity = 1
+            }
         }
     }
 }

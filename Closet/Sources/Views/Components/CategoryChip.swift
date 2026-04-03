@@ -4,6 +4,7 @@ struct CategoryChip: View {
     let category: ClothingCategory?
     let isSelected: Bool
     let action: () -> Void
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
 
     var label: String {
         category?.rawValue ?? "All"
@@ -13,11 +14,12 @@ struct CategoryChip: View {
         Button(action: action) {
             Text(label)
                 .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(isSelected ? .white : Color(hex: "#6E6E73"))
+                .foregroundStyle(isSelected ? .white : ClosetDesign.Colors.tertiaryText)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(isSelected ? Color(hex: "#1C1C1E") : Color(hex: "#E8E8E6"))
+                .background(isSelected ? ClosetDesign.Colors.primaryText : ClosetDesign.Colors.divider)
                 .clipShape(Capsule())
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: isSelected)
         }
         .buttonStyle(.plain)
     }

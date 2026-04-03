@@ -1,0 +1,30 @@
+{
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Services/MonthlyTrendService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendService.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendService.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Screens/GiftView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/GiftView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/GiftView.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/GiftView.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/GiftView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/GiftView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Screens/MonthlyTrendView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendView.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendView.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/MonthlyTrendView.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Screens/OutfitDetailView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitDetailView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitDetailView.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitDetailView.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitDetailView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/OutfitDetailView.swiftdeps"
+  }
+}

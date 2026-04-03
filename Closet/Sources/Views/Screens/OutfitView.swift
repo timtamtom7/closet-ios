@@ -1,14 +1,16 @@
 import SwiftUI
+import UIKit
 
 struct OutfitView: View {
     @State private var outfitViewModel = OutfitViewModel()
-    @State private var wardrobeViewModel = WardrobeViewModel()
+    @Environment(WardrobeViewModel.self) private var wardrobeViewModel
     @State private var showWhyNotSheet = false
     @State private var showScoreSheet = false
     @State private var showShareSheet = false
     @State private var shareImage: UIImage?
     @State private var todayEvents: [CalendarService.CalendarEvent] = []
     @State private var calendarAuthorized = false
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -47,7 +49,7 @@ struct OutfitView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 40)
             }
-            .background(Color(hex: "#FAFAF8"))
+            .background(ClosetDesign.Colors.background)
             .navigationTitle("Outfits")
             .navigationBarTitleDisplayMode(.large)
             .overlay(alignment: .top) {
@@ -107,10 +109,10 @@ struct OutfitView: View {
             HStack {
                 Image(systemName: "calendar")
                     .font(.system(size: 16))
-                    .foregroundStyle(Color(hex: "#B8A898"))
+                    .foregroundStyle(ClosetDesign.Colors.accent)
                 Text("Today's Calendar")
-                    .font(.system(size: 16, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .font(ClosetDesign.Typography.heading3)
+                    .foregroundStyle(ClosetDesign.Colors.primaryText)
                 Spacer()
             }
 
@@ -120,17 +122,19 @@ struct OutfitView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(event.title)
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(Color(hex: "#1C1C1E"))
+                                .foregroundStyle(ClosetDesign.Colors.primaryText)
                                 .lineLimit(1)
                             Text(timeRange(from: event))
                                 .font(.system(size: 12))
-                                .foregroundStyle(Color(hex: "#6E6E73"))
+                                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                         }
 
                         Spacer()
 
                         Button {
-                            outfitViewModel.selectedEventType = event.suggestedEventType
+                            withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.2)) {
+                                outfitViewModel.selectedEventType = event.suggestedEventType
+                            }
                         } label: {
                             HStack(spacing: 4) {
                                 Image(systemName: event.suggestedEventType.icon)
@@ -141,44 +145,50 @@ struct OutfitView: View {
                             .foregroundStyle(
                                 outfitViewModel.selectedEventType == event.suggestedEventType
                                 ? .white
-                                : Color(hex: "#1C1C1E")
+                                : ClosetDesign.Colors.primaryText
                             )
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
                             .background(
                                 outfitViewModel.selectedEventType == event.suggestedEventType
-                                ? Color(hex: "#1C1C1E")
-                                : Color(hex: "#FFFFFF")
+                                ? ClosetDesign.Colors.primaryText
+                                : ClosetDesign.Colors.surface
                             )
                             .clipShape(Capsule())
                             .overlay {
                                 Capsule()
-                                    .stroke(Color(hex: "#E8E8E6"), lineWidth: 1)
+                                    .stroke(ClosetDesign.Colors.divider, lineWidth: 1)
                             }
                         }
                         .buttonStyle(.plain)
                     }
                     .padding(12)
-                    .background(Color(hex: "#FAFAF8"))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .background(ClosetDesign.Colors.background)
+                    .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                 }
             } else if calendarAuthorized {
                 Text("No events scheduled for today")
                     .font(.system(size: 13))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
             } else {
                 HStack(spacing: 8) {
                     Image(systemName: "lock.shield")
                         .font(.system(size: 12))
                     Text("Calendar access not granted")
                         .font(.system(size: 13))
+                    Button("Open Settings") {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    .font(ClosetDesign.Typography.caption)
                 }
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
             }
         }
         .padding(16)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .background(ClosetDesign.Colors.surface)
+        .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         .padding(.horizontal, 20)
     }
 
@@ -194,7 +204,7 @@ struct OutfitView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Today's Weather")
                     .font(.system(size: 13, weight: .regular))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 WeatherBadge(weather: outfitViewModel.currentWeather)
             }
             Spacer()
@@ -206,19 +216,19 @@ struct OutfitView: View {
         VStack(spacing: 16) {
             Image(systemName: "sparkles")
                 .font(.system(size: 48))
-                .foregroundStyle(Color(hex: "#E8E8E6"))
+                .foregroundStyle(ClosetDesign.Colors.divider)
             Text("No outfits saved yet")
-                .font(.system(size: 20, weight: .semibold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .font(ClosetDesign.Typography.sectionTitle)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
             if wardrobeViewModel.items.count < 3 {
                 Text("Add at least 3 clothing items to start generating outfits")
                     .font(.system(size: 14))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                     .multilineTextAlignment(.center)
             } else {
                 Text("Generate your first outfit above")
                     .font(.system(size: 14))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                     .multilineTextAlignment(.center)
             }
         }
@@ -230,11 +240,11 @@ struct OutfitView: View {
         VStack(spacing: 20) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Generate Outfits")
-                    .font(.system(size: 22, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .font(ClosetDesign.Typography.sectionTitle)
+                    .foregroundStyle(ClosetDesign.Colors.primaryText)
                 Text("Set your context and let the AI curate looks for you")
                     .font(.system(size: 14))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 20)
@@ -244,34 +254,36 @@ struct OutfitView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Event")
                             .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                         Picker("Event", selection: $outfitViewModel.selectedEventType) {
                             ForEach(EventType.allCases) { evt in
                                 Label(evt.rawValue, systemImage: evt.icon).tag(evt)
                             }
                         }
                         .pickerStyle(.menu)
-                        .tint(Color(hex: "#1C1C1E"))
+                        .tint(ClosetDesign.Colors.primaryText)
                     }
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Mood")
                             .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                         Picker("Mood", selection: $outfitViewModel.selectedMood) {
                             ForEach(Mood.allCases) { m in
                                 Text(m.rawValue).tag(m)
                             }
                         }
                         .pickerStyle(.menu)
-                        .tint(Color(hex: "#1C1C1E"))
+                        .tint(ClosetDesign.Colors.primaryText)
                     }
                 }
                 .padding(16)
-                .background(Color(hex: "#FFFFFF"))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .background(ClosetDesign.Colors.surface)
+                .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
 
                 Button {
+                    let tap = UIImpactFeedbackGenerator(style: .light)
+                    tap.impactOccurred()
                     Task {
                         await outfitViewModel.generateOutfits(from: wardrobeViewModel.items)
                     }
@@ -281,9 +293,10 @@ struct OutfitView: View {
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(Color(hex: "#1C1C1E"))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .background(ClosetDesign.Colors.primaryText)
+                        .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                 }
+                .buttonStyle(ScaleButtonStyle())
                 .disabled(wardrobeViewModel.items.count < 3)
                 .opacity(wardrobeViewModel.items.count < 3 ? 0.5 : 1)
             }
@@ -299,7 +312,7 @@ struct OutfitView: View {
         VStack(spacing: 16) {
             Text("Swipe right to save, left to pass")
                 .font(.system(size: 12))
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
 
             if let current = outfitViewModel.currentSuggestion {
                 OutfitCard(
@@ -325,13 +338,13 @@ struct OutfitView: View {
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 44))
-                        .foregroundStyle(Color(hex: "#B8A898"))
+                        .foregroundStyle(ClosetDesign.Colors.accent)
                     Text("You've seen all suggestions!")
                         .font(.system(size: 15, weight: .medium))
-                        .foregroundStyle(Color(hex: "#1C1C1E"))
+                        .foregroundStyle(ClosetDesign.Colors.primaryText)
                     Text("Save more clothes to generate new looks")
                         .font(.system(size: 13))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 40)
@@ -341,7 +354,7 @@ struct OutfitView: View {
                 HStack(spacing: 4) {
                     ForEach(0..<outfitViewModel.suggestedOutfits.count, id: \.self) { index in
                         Circle()
-                            .fill(index == outfitViewModel.currentSuggestionIndex ? Color(hex: "#1C1C1E") : Color(hex: "#E8E8E6"))
+                            .fill(index == outfitViewModel.currentSuggestionIndex ? ClosetDesign.Colors.primaryText : ClosetDesign.Colors.divider)
                             .frame(width: 6, height: 6)
                     }
                 }
@@ -353,12 +366,12 @@ struct OutfitView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Text("Outfit Log")
-                    .font(.system(size: 22, weight: .semibold, design: .serif))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .font(ClosetDesign.Typography.sectionTitle)
+                    .foregroundStyle(ClosetDesign.Colors.primaryText)
                 Spacer()
                 Text("\(outfitViewModel.outfits.count) saved")
                     .font(.system(size: 13))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
             }
             .padding(.horizontal, 20)
 
@@ -370,8 +383,13 @@ struct OutfitView: View {
                         Task { await outfitViewModel.deleteOutfit(outfit) }
                     }
                 )
+                .transition(.asymmetric(
+                    insertion: .opacity.combined(with: .move(edge: .bottom)),
+                    removal: .opacity
+                ))
             }
         }
+        .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.75), value: outfitViewModel.outfits.count)
     }
 }
 
@@ -395,26 +413,26 @@ struct OutfitLogRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(outfit.name)
                     .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(Color(hex: "#1C1C1E"))
+                    .foregroundStyle(ClosetDesign.Colors.primaryText)
                     .lineLimit(1)
 
                 HStack(spacing: 4) {
                     Text(outfit.eventType.rawValue)
                         .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                     Text("·")
-                        .foregroundStyle(Color(hex: "#E8E8E6"))
+                        .foregroundStyle(ClosetDesign.Colors.divider)
                     Text(outfit.createdAt.formatted(date: .abbreviated, time: .omitted))
                         .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 }
             }
 
             Spacer()
         }
         .padding(12)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .background(ClosetDesign.Colors.surface)
+        .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(role: .destructive) { onDelete() } label: {
                 Label("Delete", systemImage: "trash")
@@ -436,18 +454,18 @@ struct OutfitThumbnailSmall: View {
                     .aspectRatio(contentMode: .fill)
             } else {
                 Rectangle()
-                    .fill(Color(hex: "#E8E8E6"))
+                    .fill(ClosetDesign.Colors.divider)
                     .overlay {
                         Image(systemName: item.category.icon)
                             .font(.system(size: 10))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                     }
             }
         }
         .frame(width: 36, height: 48)
         .clipShape(RoundedRectangle(cornerRadius: 6))
         .overlay {
-            RoundedRectangle(cornerRadius: 6).stroke(Color(hex: "#FFFFFF"), lineWidth: 1.5)
+            RoundedRectangle(cornerRadius: 6).stroke(ClosetDesign.Colors.surface, lineWidth: 1.5)
         }
         .task {
             image = await ImageStorageService.shared.loadImage(path: item.imagePath)

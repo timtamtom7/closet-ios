@@ -40,7 +40,7 @@ struct StyleProfileView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 40)
             }
-            .background(Color(hex: "#FAFAF8"))
+            .background(ClosetDesign.Colors.background)
             .navigationTitle("Style Profile")
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showMonthlyTrend) {
@@ -104,12 +104,12 @@ struct StyleProfileView: View {
                     Text("Monthly Trends")
                         .font(.system(size: 14, weight: .medium))
                 }
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
-                .background(Color(hex: "#FFFFFF"))
+                .background(ClosetDesign.Colors.surface)
                 .clipShape(Capsule())
-                .shadow(color: Color(hex: "#1C1C1E").opacity(0.05), radius: 4, x: 0, y: 2)
+                .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
             }
             .buttonStyle(.plain)
 
@@ -122,12 +122,12 @@ struct StyleProfileView: View {
                     Text("Timeline")
                         .font(.system(size: 14, weight: .medium))
                 }
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
-                .background(Color(hex: "#FFFFFF"))
+                .background(ClosetDesign.Colors.surface)
                 .clipShape(Capsule())
-                .shadow(color: Color(hex: "#1C1C1E").opacity(0.05), radius: 4, x: 0, y: 2)
+                .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
             }
             .buttonStyle(.plain)
         }
@@ -138,15 +138,15 @@ struct StyleProfileView: View {
         VStack(spacing: 12) {
             Image(systemName: "person.crop.circle")
                 .font(.system(size: 60))
-                .foregroundStyle(Color(hex: "#B8A898"))
+                .foregroundStyle(ClosetDesign.Colors.accent)
 
             Text("Your Style Profile")
-                .font(.system(size: 28, weight: .bold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .font(ClosetDesign.Typography.heading1)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
 
             Text("Updated from \(viewModel.profile.totalItems) items and \(viewModel.profile.totalOutfits) outfits")
                 .font(.system(size: 14))
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
         }
         .padding(.horizontal, 20)
     }
@@ -189,24 +189,24 @@ struct StyleProfileView: View {
     private var tagsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Top Tags")
-                .font(.system(size: 18, weight: .semibold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .font(ClosetDesign.Typography.heading2)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
 
             FlowLayout(spacing: 8) {
                 ForEach(Array(viewModel.profile.topTags.sorted { $0.value > $1.value }.prefix(10)), id: \.key) { tag, count in
                     HStack(spacing: 4) {
                         Text(tag)
                             .font(.system(size: 13))
-                            .foregroundStyle(Color(hex: "#1C1C1E"))
+                            .foregroundStyle(ClosetDesign.Colors.primaryText)
                         Text("\(count)")
                             .font(.system(size: 11, weight: .medium))
-                            .foregroundStyle(Color(hex: "#6E6E73"))
+                            .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(Color(hex: "#FFFFFF"))
+                    .background(ClosetDesign.Colors.surface)
                     .clipShape(Capsule())
-                    .shadow(color: Color(hex: "#1C1C1E").opacity(0.05), radius: 4, x: 0, y: 2)
+                    .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
                 }
             }
         }
@@ -216,33 +216,33 @@ struct StyleProfileView: View {
     private var summarySection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Style Summary")
-                .font(.system(size: 18, weight: .semibold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .font(ClosetDesign.Typography.heading2)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
 
             Text(viewModel.insight)
-                .font(.system(size: 15, design: .serif))
-                .foregroundStyle(Color(hex: "#6E6E73"))
+                .font(ClosetDesign.Typography.body)
+                .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 .lineSpacing(4)
 
             if !viewModel.profile.colorStory.isEmpty {
                 Text(viewModel.profile.colorStory)
-                    .font(.system(size: 15, design: .serif))
-                    .foregroundStyle(Color(hex: "#6E6E73"))
+                    .font(ClosetDesign.Typography.body)
+                    .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                     .lineSpacing(4)
             }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(hex: "#FFFFFF"))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .background(ClosetDesign.Colors.surface)
+        .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.image))
         .padding(.horizontal, 20)
     }
 
     private var moreOptionsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("More")
-                .font(.system(size: 18, weight: .semibold, design: .serif))
-                .foregroundStyle(Color(hex: "#1C1C1E"))
+                .font(ClosetDesign.Typography.heading2)
+                .foregroundStyle(ClosetDesign.Colors.primaryText)
 
             VStack(spacing: 8) {
                 MoreOptionRow(
@@ -282,33 +282,33 @@ struct MoreOptionRow: View {
             HStack(spacing: 12) {
                 ZStack {
                     Circle()
-                        .fill(Color(hex: "#B8A898").opacity(0.15))
+                        .fill(ClosetDesign.Colors.accent.opacity(0.15))
                         .frame(width: 40, height: 40)
 
                     Image(systemName: icon)
                         .font(.system(size: 16))
-                        .foregroundStyle(Color(hex: "#B8A898"))
+                        .foregroundStyle(ClosetDesign.Colors.accent)
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(Color(hex: "#1C1C1E"))
+                        .foregroundStyle(ClosetDesign.Colors.primaryText)
 
                     Text(subtitle)
                         .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "#6E6E73"))
+                        .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 }
 
                 Spacer()
 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12))
-                    .foregroundStyle(Color(hex: "#E8E8E6"))
+                    .foregroundStyle(ClosetDesign.Colors.divider)
             }
             .padding(12)
-            .background(Color(hex: "#FFFFFF"))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .background(ClosetDesign.Colors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         }
         .buttonStyle(.plain)
     }

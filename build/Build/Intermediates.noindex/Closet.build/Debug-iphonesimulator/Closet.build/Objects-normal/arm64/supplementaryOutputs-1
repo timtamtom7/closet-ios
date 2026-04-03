@@ -1,0 +1,30 @@
+{
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/App/ClosetApp.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ClosetApp.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ClosetApp.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ClosetApp.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ClosetApp.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ClosetApp.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Services/CalendarService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CalendarService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CalendarService.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CalendarService.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CalendarService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CalendarService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Components/CameraOverlayGuide.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CameraOverlayGuide.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CameraOverlayGuide.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CameraOverlayGuide.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CameraOverlayGuide.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CameraOverlayGuide.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Components/CategoryChip.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CategoryChip.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CategoryChip.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CategoryChip.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CategoryChip.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/CategoryChip.swiftdeps"
+  }
+}

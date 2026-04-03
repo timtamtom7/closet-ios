@@ -132,7 +132,7 @@ actor DatabaseService {
 
     func incrementWearCount(id itemId: UUID) throws {
         let item = clothingItems.filter(id == itemId.uuidString)
-        try db?.run(item.update(wearCount++))
+        try db?.run(item.update(wearCount <- wearCount + 1))
     }
 
     // MARK: - Outfit CRUD

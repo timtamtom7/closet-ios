@@ -4,6 +4,11 @@ import Vision
 import UIKit
 #endif
 
+// NOTE: VNClassifyImageRequest is a general ImageNet classifier.
+// For production, replace with a dedicated fashion/clothing ML model
+// such as Apple's VisionKit or a custom CoreML model trained on
+// a fashion taxonomy (e.g., ModaNet, DeepFashion).
+
 actor VisionService {
     static let shared = VisionService()
 
@@ -41,7 +46,18 @@ actor VisionService {
                     return
                 }
 
-                let topResult = results.first?.identifier.lowercased() ?? ""
+                guard let topObservation = results.first else {
+                    continuation.resume(returning: ClothingCategory.unknown)
+                    return
+                }
+
+                let minConfidence: Float = 0.3
+                if topObservation.confidence < minConfidence {
+                    continuation.resume(returning: ClothingCategory.unknown)
+                    return
+                }
+
+                let topResult = topObservation.identifier.lowercased()
 
                 let category: ClothingCategory
                 if topResult.contains("shirt") || topResult.contains("top") || topResult.contains("blouse") || topResult.contains("t-shirt") || topResult.contains("sweater") || topResult.contains("jacket") {
@@ -127,13 +143,17 @@ actor VisionService {
 
         if delta < 30 { return "#808080" }
 
+        if delta == 0 {
+            return "neutral" // grayscale
+        }
+
         var hue: Double = 0
         if maxC == r {
             hue = 60.0 * (Double(g - b).truncatingRemainder(dividingBy: 6.0) / Double(delta))
         } else if maxC == g {
-            hue = 60.0 * ((Double(b - r) / Double(delta)) + 2.0)
+            hue = 60.0 * (((Double(b - r) / Double(delta)) + 2.0))
         } else {
-            hue = 60.0 * ((Double(r - g) / Double(delta)) + 4.0)
+            hue = 60.0 * (((Double(r - g) / Double(delta)) + 4.0))
         }
 
         if hue < 0 { hue += 360.0 }

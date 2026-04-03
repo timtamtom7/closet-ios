@@ -1,0 +1,23 @@
+{
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Services/ShareService.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareService.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareService.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareService.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareService.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareService.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/Components/ShareSheet.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareSheet.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareSheet.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareSheet.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareSheet.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/ShareSheet.swiftdeps"
+  },
+  "/Users/mauriello/Dev/closet-ios/Closet/Sources/Views/SpatialWardrobeView.swift" : {
+    "const-values" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/SpatialWardrobeView.swiftconstvalues",
+    "dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/SpatialWardrobeView.d",
+    "diagnostics" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/SpatialWardrobeView.dia",
+    "object" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/SpatialWardrobeView.o",
+    "swift-dependencies" : "/Users/mauriello/Dev/closet-ios/build/Build/Intermediates.noindex/Closet.build/Debug-iphonesimulator/Closet.build/Objects-normal/arm64/SpatialWardrobeView.swiftdeps"
+  }
+}

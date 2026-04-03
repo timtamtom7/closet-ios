@@ -13,6 +13,7 @@
 		1DCC2F8A4AB286312AF9966F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C603BAC46F90A6AC45B5AB9A /* DatabaseService.swift */; };
 		1E9B39DEEADE84676C86A5FE /* iPadDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09F579ECCD44AE18ED3B822 /* iPadDashboardView.swift */; };
 		2171AB6961E8B13EB5046675 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C752C070E3473646C3F12387 /* ExportView.swift */; };
+		27CE10A59C58858C6BC92BEC /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC002947E5FFAD059291862B /* DesignSystem.swift */; };
 		28266E1F6C5F6161D0B18395 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D882131E61C3E9D495E24AAF /* SQLite */; };
 		2A075E50CF542675356E4387 /* OutfitEvolutionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6409E3ABEC91FEBB0526B358 /* OutfitEvolutionService.swift */; };
 		2C1025B2ACDE6CF545013590 /* TravelPackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA39C6B1919B540600ADE25 /* TravelPackingService.swift */; };
@@ -46,6 +47,7 @@
 		94224A98C94C1C8336ECBBEF /* GiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8045339D80B0F0217BF76179 /* GiftView.swift */; };
 		A6D6406BC3AD87A51DA3D611 /* StyleConsultationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BE8281902A6B03FF00625 /* StyleConsultationView.swift */; };
 		A7A99D9D9E63BD34AD647B9A /* MonthlyTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5243CF8626203B327841B25B /* MonthlyTrendView.swift */; };
+		A81F8F5A4FB589F02C066DA8 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491DF2F1BD9FB48E4FDDEFBD /* Color+Hex.swift */; };
 		AFFC008D4CE840438114281F /* OutfitRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14737E344E4DE3567684BDAC /* OutfitRating.swift */; };
 		B99E130321017D0A7C94C1A9 /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */; };
 		C24BDFECDD626B8E14764301 /* RetentionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA867D29254A9B48F7DA03 /* RetentionService.swift */; };
@@ -83,6 +85,7 @@
 		4109AC18734D6E3006A71446 /* ColorPaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteViewModel.swift; sourceTree = "<group>"; };
 		42C5548E4A5C30E8831D01D3 /* StyleStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleStatCard.swift; sourceTree = "<group>"; };
 		46CA867D29254A9B48F7DA03 /* RetentionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionService.swift; sourceTree = "<group>"; };
+		491DF2F1BD9FB48E4FDDEFBD /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		4FCEF61F0E7CE339C99C4803 /* WeatherBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBadge.swift; sourceTree = "<group>"; };
 		51E9F2FCC4A1C8EF16985AC2 /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		5243CF8626203B327841B25B /* MonthlyTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTrendView.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 		C752C070E3473646C3F12387 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		C755F902185C748BDC313E88 /* ExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportService.swift; sourceTree = "<group>"; };
 		C83098FB13BB6E695E4DC8DF /* ClothingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
+		CC002947E5FFAD059291862B /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		D0993C8FBA1D196463245AAA /* WardrobeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeViewModel.swift; sourceTree = "<group>"; };
 		D29D8D5373899A289A409850 /* ClosetWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosetWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7008E43726B6B3E1502AB72 /* Closet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Closet.entitlements; sourceTree = "<group>"; };
@@ -185,7 +189,9 @@
 		6204D75F41F6BAA1E1F01214 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CC002947E5FFAD059291862B /* DesignSystem.swift */,
 				FEFD39F25C97832B571E8042 /* App */,
+				C5C2D78F7BD622303F71654D /* Extensions */,
 				D8E6E510C8876EA9DCADBC3A /* Models */,
 				75899653E30749B240D12874 /* Services */,
 				0452D9DBD9ED9269A75AF611 /* ViewModels */,
@@ -258,6 +264,14 @@
 				D29D8D5373899A289A409850 /* ClosetWatch.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C5C2D78F7BD622303F71654D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				491DF2F1BD9FB48E4FDDEFBD /* Color+Hex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C5E661B2725DB4D5B1D06C15 /* ClosetWatch */ = {
@@ -434,11 +448,13 @@
 				4BFE67FDD8351A65E5FE3E08 /* ClosetR11Service.swift in Sources */,
 				3141319777E0EA7ED4A7EB47 /* ClothingItem.swift in Sources */,
 				7166ECA6601BE1FE345C6089 /* ClothingItemCard.swift in Sources */,
+				A81F8F5A4FB589F02C066DA8 /* Color+Hex.swift in Sources */,
 				D979593F472C54B0E41FDFE4 /* ColorPaletteAnalysisService.swift in Sources */,
 				B99E130321017D0A7C94C1A9 /* ColorPaletteView.swift in Sources */,
 				C77DF17C28D09FD505185110 /* ColorPaletteViewModel.swift in Sources */,
 				522BC691B7D8950F1BA42859 /* ContentView.swift in Sources */,
 				1DCC2F8A4AB286312AF9966F /* DatabaseService.swift in Sources */,
+				27CE10A59C58858C6BC92BEC /* DesignSystem.swift in Sources */,
 				0350809730331ED1085B357C /* Enums.swift in Sources */,
 				C2D8B1D7271A8439B78108C9 /* ExportService.swift in Sources */,
 				2171AB6961E8B13EB5046675 /* ExportView.swift in Sources */,

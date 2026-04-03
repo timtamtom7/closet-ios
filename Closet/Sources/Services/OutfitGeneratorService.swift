@@ -12,7 +12,7 @@ actor OutfitGeneratorService {
         weather: String,
         temperature: Double?,
         count: Int = 5
-    ) -> [Outfit] {
+    ) async -> [Outfit] {
         guard items.count >= 3 else { return [] }
 
         let tops = items.filter { $0.category == .tops || $0.category == .dresses }

@@ -14,7 +14,7 @@ struct OutfitDetailView: View {
                     // Outfit image grid
                     VStack(spacing: -12) {
                         HStack(spacing: -12) {
-                            ForEach(Array(outfit.itemIds.prefix(3).enumerated()), id: \.offset) { index, itemId in
+                            ForEach(Array(outfit.itemIds.prefix(3).enumerated()), id: \.element) { index, itemId in
                                 if let item = items.first(where: { $0.id == itemId }) {
                                     OutfitDetailThumbnail(item: item)
                                         .zIndex(Double(3 - index))
