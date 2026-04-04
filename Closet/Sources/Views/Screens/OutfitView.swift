@@ -1,4 +1,6 @@
 import SwiftUI
+
+@Environment(\.colorScheme) var colorScheme
 import UIKit
 
 struct OutfitView: View {
@@ -49,7 +51,7 @@ struct OutfitView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 40)
             }
-            .background(ClosetDesign.Colors.background)
+            .background(ClosetDesign.Colors.background(for: colorScheme))
             .navigationTitle("Outfits")
             .navigationBarTitleDisplayMode(.large)
             .overlay(alignment: .top) {
@@ -152,7 +154,7 @@ struct OutfitView: View {
                             .background(
                                 outfitViewModel.selectedEventType == event.suggestedEventType
                                 ? ClosetDesign.Colors.primaryText
-                                : ClosetDesign.Colors.surface
+                                : ClosetDesign.Colors.surface(for: colorScheme)
                             )
                             .clipShape(Capsule())
                             .overlay {
@@ -163,7 +165,7 @@ struct OutfitView: View {
                         .buttonStyle(.plain)
                     }
                     .padding(12)
-                    .background(ClosetDesign.Colors.background)
+                    .background(ClosetDesign.Colors.background(for: colorScheme))
                     .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                 }
             } else if calendarAuthorized {
@@ -187,7 +189,7 @@ struct OutfitView: View {
             }
         }
         .padding(16)
-        .background(ClosetDesign.Colors.surface)
+        .background(ClosetDesign.Colors.surface(for: colorScheme))
         .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         .padding(.horizontal, 20)
     }
@@ -278,7 +280,7 @@ struct OutfitView: View {
                     }
                 }
                 .padding(16)
-                .background(ClosetDesign.Colors.surface)
+                .background(ClosetDesign.Colors.surface(for: colorScheme))
                 .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
 
                 Button {
@@ -431,7 +433,7 @@ struct OutfitLogRow: View {
             Spacer()
         }
         .padding(12)
-        .background(ClosetDesign.Colors.surface)
+        .background(ClosetDesign.Colors.surface(for: colorScheme))
         .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(role: .destructive) { onDelete() } label: {
@@ -465,7 +467,7 @@ struct OutfitThumbnailSmall: View {
         .frame(width: 36, height: 48)
         .clipShape(RoundedRectangle(cornerRadius: 6))
         .overlay {
-            RoundedRectangle(cornerRadius: 6).stroke(ClosetDesign.Colors.surface, lineWidth: 1.5)
+            RoundedRectangle(cornerRadius: 6).stroke(ClosetDesign.Colors.surface(for: colorScheme), lineWidth: 1.5)
         }
         .task {
             image = await ImageStorageService.shared.loadImage(path: item.imagePath)

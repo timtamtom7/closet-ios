@@ -1,4 +1,6 @@
 import SwiftUI
+
+@Environment(\.colorScheme) var colorScheme
 import UIKit
 
 struct OutfitCard: View {
@@ -35,7 +37,7 @@ struct OutfitCard: View {
     var body: some View {
         cardContent
             .padding(20)
-            .background(ClosetDesign.Colors.surface)
+            .background(ClosetDesign.Colors.surface(for: colorScheme))
             .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
             .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.08), radius: 20, x: 0, y: 8)
             .offset(x: offset)

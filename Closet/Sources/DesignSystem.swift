@@ -107,27 +107,30 @@ enum ClosetDesign {
 // MARK: - View Extension Helpers
 
 extension View {
-    func closetCard() -> some View {
+    /// Adaptive card: surface color in light, dark surface in dark mode
+    func closetCard(colorScheme: ColorScheme) -> some View {
         self
-            .background(ClosetDesign.Colors.surface)
+            .background(ClosetDesign.Colors.surface(for: colorScheme))
             .cornerRadius(ClosetDesign.Radius.card)
             .shadow(
-                color: ClosetDesign.Shadow.card.color,
-                radius: ClosetDesign.Shadow.card.radius,
+                color: colorScheme == .dark ? .clear : ClosetDesign.Shadow.card.color,
+                radius: colorScheme == .dark ? 0 : ClosetDesign.Shadow.card.radius,
                 x: ClosetDesign.Shadow.card.x,
                 y: ClosetDesign.Shadow.card.y
             )
     }
     
-    func closetBody() -> some View {
+    /// Adaptive body text color
+    func closetBody(colorScheme: ColorScheme) -> some View {
         self
             .font(ClosetDesign.Typography.body)
-            .foregroundColor(ClosetDesign.Colors.primaryText)
+            .foregroundColor(ClosetDesign.Colors.primaryText(for: colorScheme))
     }
     
-    func closetCaption() -> some View {
+    /// Adaptive caption color
+    func closetCaption(colorScheme: ColorScheme) -> some View {
         self
             .font(ClosetDesign.Typography.caption)
-            .foregroundColor(ClosetDesign.Colors.tertiaryText)
+            .foregroundColor(ClosetDesign.Colors.tertiaryText(for: colorScheme))
     }
 }

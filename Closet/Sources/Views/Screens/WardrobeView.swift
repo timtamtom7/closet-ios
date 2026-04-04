@@ -1,4 +1,6 @@
 import SwiftUI
+
+@Environment(\.colorScheme) var colorScheme
 import PhotosUI
 
 struct WardrobeView: View {
@@ -47,7 +49,7 @@ struct WardrobeView: View {
 
                 cameraButton
             }
-            .background(ClosetDesign.Colors.background)
+            .background(ClosetDesign.Colors.background(for: colorScheme))
             .navigationTitle("Wardrobe")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -185,7 +187,7 @@ struct AddItemSheet: View {
                         .foregroundStyle(ClosetDesign.Colors.tertiaryText)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(ClosetDesign.Colors.background)
+                .background(ClosetDesign.Colors.background(for: colorScheme))
             } else {
                 ScrollView {
                     VStack(spacing: 24) {
@@ -204,7 +206,7 @@ struct AddItemSheet: View {
                             TextField("Item name", text: $viewModel.itemName)
                                 .font(.system(size: 17))
                                 .padding(12)
-                                .background(ClosetDesign.Colors.background)
+                                .background(ClosetDesign.Colors.background(for: colorScheme))
                                 .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                                 .overlay {
                                     RoundedRectangle(cornerRadius: ClosetDesign.Radius.button).stroke(ClosetDesign.Colors.divider, lineWidth: 1)
@@ -265,7 +267,7 @@ struct AddItemSheet: View {
                     }
                     .padding(20)
                 }
-                .background(ClosetDesign.Colors.background)
+                .background(ClosetDesign.Colors.background(for: colorScheme))
             }
         }
         .navigationTitle("Add Item")
@@ -369,7 +371,7 @@ struct ItemDetailSheet: View {
                             .foregroundStyle(ClosetDesign.Colors.error)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(ClosetDesign.Colors.background)
+                            .background(ClosetDesign.Colors.background(for: colorScheme))
                             .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.button))
                             .overlay {
                                 RoundedRectangle(cornerRadius: ClosetDesign.Radius.button).stroke(ClosetDesign.Colors.error.opacity(0.3), lineWidth: 1)
@@ -379,7 +381,7 @@ struct ItemDetailSheet: View {
                 }
                 .padding(20)
             }
-            .background(ClosetDesign.Colors.background)
+            .background(ClosetDesign.Colors.background(for: colorScheme))
             .navigationTitle("Item Detail")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

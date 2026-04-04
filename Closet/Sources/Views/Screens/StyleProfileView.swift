@@ -1,5 +1,7 @@
 import SwiftUI
 
+@Environment(\.colorScheme) var colorScheme
+
 struct StyleProfileView: View {
     @State private var viewModel = StyleProfileViewModel()
     @State private var wardrobeViewModel = WardrobeViewModel()
@@ -40,7 +42,7 @@ struct StyleProfileView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 40)
             }
-            .background(ClosetDesign.Colors.background)
+            .background(ClosetDesign.Colors.background(for: colorScheme))
             .navigationTitle("Style Profile")
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showMonthlyTrend) {
@@ -107,7 +109,7 @@ struct StyleProfileView: View {
                 .foregroundStyle(ClosetDesign.Colors.primaryText)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
-                .background(ClosetDesign.Colors.surface)
+                .background(ClosetDesign.Colors.surface(for: colorScheme))
                 .clipShape(Capsule())
                 .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
             }
@@ -125,7 +127,7 @@ struct StyleProfileView: View {
                 .foregroundStyle(ClosetDesign.Colors.primaryText)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 10)
-                .background(ClosetDesign.Colors.surface)
+                .background(ClosetDesign.Colors.surface(for: colorScheme))
                 .clipShape(Capsule())
                 .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
             }
@@ -204,7 +206,7 @@ struct StyleProfileView: View {
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(ClosetDesign.Colors.surface)
+                    .background(ClosetDesign.Colors.surface(for: colorScheme))
                     .clipShape(Capsule())
                     .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
                 }
@@ -233,7 +235,7 @@ struct StyleProfileView: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(ClosetDesign.Colors.surface)
+        .background(ClosetDesign.Colors.surface(for: colorScheme))
         .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.image))
         .padding(.horizontal, 20)
     }
@@ -307,7 +309,7 @@ struct MoreOptionRow: View {
                     .foregroundStyle(ClosetDesign.Colors.divider)
             }
             .padding(12)
-            .background(ClosetDesign.Colors.surface)
+            .background(ClosetDesign.Colors.surface(for: colorScheme))
             .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         }
         .buttonStyle(.plain)
