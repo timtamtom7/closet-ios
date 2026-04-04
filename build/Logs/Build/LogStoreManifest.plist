@@ -6,48 +6,6 @@
 	<integer>11</integer>
 	<key>logs</key>
 	<dict>
-		<key>1CC95270-E2A8-4633-A159-F8E66D2C5741</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>1CC95270-E2A8-4633-A159-F8E66D2C5741.xcactivitylog</string>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>E</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>1</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>Closet project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>Closet</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Building project Closet with scheme Closet and configuration Debug</string>
-			<key>timeStartedRecording</key>
-			<real>796950835.32697499</real>
-			<key>timeStoppedRecording</key>
-			<real>796950836.24650705</real>
-			<key>title</key>
-			<string>Building project Closet with scheme Closet and configuration Debug</string>
-			<key>uniqueIdentifier</key>
-			<string>1CC95270-E2A8-4633-A159-F8E66D2C5741</string>
-		</dict>
 		<key>C20FAD00-74CF-4826-B988-ADB08359512C</key>
 		<dict>
 			<key>className</key>
@@ -89,6 +47,48 @@
 			<string>Building project Closet with scheme Closet and configuration Debug</string>
 			<key>uniqueIdentifier</key>
 			<string>C20FAD00-74CF-4826-B988-ADB08359512C</string>
+		</dict>
+		<key>EFCCFE63-5452-4B10-B429-0D73E1DCF2D6</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EFCCFE63-5452-4B10-B429-0D73E1DCF2D6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>2</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>3</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Closet project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Closet</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project Closet with scheme Closet and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>796959543.309057</real>
+			<key>timeStoppedRecording</key>
+			<real>796959545.34671605</real>
+			<key>title</key>
+			<string>Building project Closet with scheme Closet and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>EFCCFE63-5452-4B10-B429-0D73E1DCF2D6</string>
 		</dict>
 	</dict>
 </dict>
