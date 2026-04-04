@@ -230,6 +230,11 @@
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphonesimulator\/prebuilt-modules\/26.0\/Vision.swiftmodule\/arm64-apple-ios-simulator.swiftmodule"
   },
   {
+    "isFramework" : true,
+    "moduleName" : "WeatherKit",
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphonesimulator\/prebuilt-modules\/26.0\/WeatherKit.swiftmodule\/arm64-apple-ios-simulator.swiftmodule"
+  },
+  {
     "isFramework" : false,
     "moduleName" : "XPC",
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphonesimulator\/prebuilt-modules\/26.0\/XPC.swiftmodule\/arm64-apple-ios-simulator.swiftmodule"

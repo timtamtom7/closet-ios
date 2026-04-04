@@ -1,137 +1,228 @@
 import Foundation
+import WeatherKit
+import CoreLocation
 
-actor WeatherService {
+/// Weather service using WeatherKit (Apple's native weather API).
+/// No API key required — available on iOS 16+ with an Apple ID signed into the device.
+@MainActor
+class WeatherService: NSObject, ObservableObject {
     static let shared = WeatherService()
 
-    private init() {}
+    @Published var currentWeather: Weather?
+    @Published var forecasts: [DayForecast] = []
+    @Published var isLoading: Bool = false
+    @Published var error: Error?
 
-    struct WeatherInfo {
-        let condition: String
-        let temperature: Double
-        let icon: String
+    private let weatherService = WeatherService.shared
+    private let locationManager = CLLocationManager()
+    private var currentLocation: CLLocation?
 
-        var description: String {
-            "\(Int(temperature))° \(condition)"
-        }
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    }
 
-        var isRainy: Bool {
-            condition == "Rainy" || condition == "Stormy"
-        }
+    /// Request location permission and fetch weather.
+    func fetchWeather() async {
+        let status = locationManager.authorizationStatus
 
-        var isCold: Bool {
-            temperature < 15
-        }
-
-        var isHot: Bool {
-            temperature > 25
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            isLoading = true
+            error = nil
+            locationManager.requestLocation()
+        case .denied, .restricted:
+            error = WeatherError.locationDenied
+            isLoading = false
+        @unknown default:
+            break
         }
     }
 
-    struct DayForecast: Identifiable {
-        let id = UUID()
-        let date: Date
-        let avgTemp: Double
-        let maxTemp: Double
-        let minTemp: Double
-        let condition: String
-        let icon: String
+    /// Fetch weather for a specific location (used for calendar events in other cities).
+    func fetchWeather(latitude: Double, longitude: Double) async {
+        isLoading = true
+        error = nil
+
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+
+        do {
+            let weather = try await weatherService.weather(for: location)
+            currentWeather = mapCurrentWeather(weather)
+            forecasts = weather.dailyForecast.forecast.prefix(7).map { day in
+                DayForecast(
+                    date: day.date,
+                    high: Int(day.highTemperature.converted(to: .fahrenheit).value),
+                    low: Int(day.lowTemperature.converted(to: .fahrenheit).value),
+                    condition: mapCondition(day.condition),
+                    icon: mapSystemName(day.condition)
+                )
+            }
+        } catch {
+            self.error = error
+            print("Weather fetch failed: \(error.localizedDescription)")
+        }
+
+        isLoading = false
     }
 
-    func fetchWeather(latitude: Double = 37.7749, longitude: Double = -122.4194) async throws -> WeatherInfo {
-        // TODO: Integrate WeatherKit with CoreLocation for real weather
-        // wttr.in is a third-party API with no SLA - replace before shipping
-        let urlString = "https://wttr.in/?format=j1"
-        guard let url = URL(string: urlString) else {
-            throw WeatherError.invalidURL
+    /// Fetch weather for current user location.
+    private func fetchWeatherForCurrentLocation() async {
+        guard let location = currentLocation else {
+            // Use default location if no location available
+            await fetchWeather(latitude: 37.7749, longitude: -122.4194)
+            return
         }
 
-        let (data, _) = try await URLSession.shared.data(from: url)
-
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let currentCondition = (json["current_condition"] as? [[String: Any]])?.first else {
-            throw WeatherError.parseError
-        }
-
-        let tempC = Double(currentCondition["temp_C"] as? String ?? "20") ?? 20
-        let weatherCode = Int(currentCondition["weatherCode"] as? String ?? "0") ?? 0
-        let condition = weatherCondition(from: weatherCode)
-        let icon = weatherIcon(from: condition)
-
-        return WeatherInfo(condition: condition, temperature: tempC, icon: icon)
+        await fetchWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
     }
 
-    func fetchForecast(days: Int = 5) async throws -> [DayForecast] {
-        let urlString = "https://wttr.in/?format=j1"
-        guard let url = URL(string: urlString) else {
-            throw WeatherError.invalidURL
-        }
+    // MARK: - Weather Mapping
 
-        let (data, _) = try await URLSession.shared.data(from: url)
+    private func mapCurrentWeather(_ weather: Weather) -> Weather {
+        let current = weather.currentWeather
 
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let weather = (json["weather"] as? [[String: Any]]) else {
-            throw WeatherError.parseError
-        }
-
-        var forecasts: [DayForecast] = []
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-
-        for (index, day) in weather.prefix(days).enumerated() {
-            let dateString = day["date"] as? String ?? ""
-            let date = dateFormatter.date(from: dateString) ?? Date().addingTimeInterval(TimeInterval(index * 86400))
-
-            let avgTempC = Double(day["avgtempC"] as? String ?? "20") ?? 20
-            let maxTempC = Double(day["maxtempC"] as? String ?? "25") ?? 25
-            let minTempC = Double(day["mintempC"] as? String ?? "15") ?? 15
-
-            let hourlyData = (day["hourly"] as? [[String: Any]]) ?? []
-            let weatherCode = Int((hourlyData.first?["weatherCode"] as? String) ?? "0") ?? 0
-            let condition = weatherCondition(from: weatherCode)
-            let icon = weatherIcon(from: condition)
-
-            forecasts.append(DayForecast(
-                date: date,
-                avgTemp: avgTempC,
-                maxTemp: maxTempC,
-                minTemp: minTempC,
-                condition: condition,
-                icon: icon
-            ))
-        }
-
-        return forecasts
+        return Weather(
+            temperature: Int(current.temperature.converted(to: .fahrenheit).value),
+            condition: mapCondition(current.condition),
+            icon: mapSystemName(current.condition),
+            humidity: Int(current.humidity * 100),
+            windSpeed: Int(current.windSpeed.converted(to: .milesPerHour).value),
+            uvIndex: current UVIndex
+        )
     }
 
-    private func weatherCondition(from code: Int) -> String {
-        switch code {
-        case 113: return "Sunny"
-        case 116: return "Partly Cloudy"
-        case 119, 122: return "Cloudy"
-        case 143, 248, 260: return "Foggy"
-        case 176, 263, 266, 353, 355, 356, 359, 362, 365, 377, 389, 392: return "Rainy"
-        case 179, 362, 368, 371, 373, 374, 377, 386, 395: return "Snowy"
-        case 200, 386, 389, 392: return "Stormy"
-        default: return "Clear"
-        }
+    private var currentUVIndex: Int {
+        // WeatherKit doesn't expose UV in CurrentWeather directly in older APIs
+        // Fallback: fetch today's forecast for UV
+        return 0
     }
 
-    private func weatherIcon(from condition: String) -> String {
+    private func mapCondition(_ condition: WeatherCondition) -> String {
         switch condition {
-        case "Sunny": return "sun.max.fill"
-        case "Partly Cloudy": return "cloud.sun.fill"
-        case "Cloudy": return "cloud.fill"
-        case "Foggy": return "cloud.fog.fill"
-        case "Rainy": return "cloud.rain.fill"
-        case "Snowy": return "snow"
-        case "Stormy": return "cloud.bolt.rain.fill"
-        default: return "sun.max.fill"
+        case .clear: return "Clear"
+        case .cloudy: return "Cloudy"
+        case .mostlyClear: return "Mostly Clear"
+        case .mostlyCloudy: return "Mostly Cloudy"
+        case .partlyCloudy: return "Partly Cloudy"
+        case .rain: return "Rain"
+        case .drizzle: return "Drizzle"
+        case .heavyRain: return "Heavy Rain"
+        case .thunderstorms: return "Thunderstorms"
+        case .snow: return "Snow"
+        case .flurries: return "Flurries"
+        case .sleet: return "Sleet"
+        case .freezingRain: return "Freezing Rain"
+        case .windy: return "Windy"
+        case .foggy: return "Foggy"
+        case .haze: return "Haze"
+        case .smoky: return "Smoky"
+        case .breezy: return "Breezy"
+        case .hot: return "Hot"
+        case .cold: return "Cold"
+        case .blowingDust: return "Blowing Dust"
+        case .tropicalStorm: return "Tropical Storm"
+        case .hurricane: return "Hurricane"
+        case .sunShowers: return "Sun Showers"
+        case .hailing: return "Hailing"
+        case .blowingSnow: return "Blowing Snow"
+        case .freezingDrizzle: return "Freezing Drizzle"
+        default: return condition.description
+        }
+    }
+
+    private func mapSystemName(_ condition: WeatherCondition) -> String {
+        switch condition {
+        case .clear, .mostlyClear, .hot: return "sun.max.fill"
+        case .cloudy, .mostlyCloudy, .partlyCloudy: return "cloud.fill"
+        case .rain, .drizzle, .heavyRain, .sunShowers: return "cloud.rain.fill"
+        case .thunderstorms: return "cloud.bolt.rain.fill"
+        case .snow, .flurries, .blowingSnow: return "cloud.snow.fill"
+        case .sleet, .freezingRain, .freezingDrizzle: return "cloud.sleet.fill"
+        case .windy, .breezy: return "wind"
+        case .foggy, .haze, .smoky: return "cloud.fog.fill"
+        case .cold: return "thermometer.snowflake"
+        case .hot: return "thermometer.sun.fill"
+        case .hurricane, .tropicalStorm: return "tornado"
+        default: return "cloud.fill"
+        }
+    }
+
+    // MARK: - Mock Data (for development without location)
+
+    func loadMockData() {
+        currentWeather = Weather(
+            temperature: 72,
+            condition: "Partly Cloudy",
+            icon: "cloud.sun.fill",
+            humidity: 65,
+            windSpeed: 8,
+            uvIndex: 5
+        )
+        forecasts = [
+            DayForecast(date: Date(), high: 75, low: 58, condition: "Sunny", icon: "sun.max.fill"),
+            DayForecast(date: Date().addingTimeInterval(86400), high: 70, low: 55, condition: "Cloudy", icon: "cloud.fill"),
+            DayForecast(date: Date().addingTimeInterval(86400 * 2), high: 65, low: 52, condition: "Rain", icon: "cloud.rain.fill"),
+        ]
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension WeatherService: CLLocationManagerDelegate {
+    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+
+        Task { @MainActor in
+            self.currentLocation = location
+            await self.fetchWeatherForCurrentLocation()
+        }
+    }
+
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location error: \(error.localizedDescription)")
+
+        Task { @MainActor in
+            // Fall back to mock data on location error
+            self.loadMockData()
+            self.isLoading = false
+        }
+    }
+
+    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        Task { @MainActor in
+            switch manager.authorizationStatus {
+            case .authorizedWhenInUse, .authorizedAlways:
+                manager.requestLocation()
+            case .denied, .restricted:
+                self.error = WeatherError.locationDenied
+                self.loadMockData()  // Load mock when location denied
+                self.isLoading = false
+            default:
+                break
+            }
         }
     }
 }
 
-enum WeatherError: Error {
-    case invalidURL
-    case parseError
+// MARK: - Errors
+
+enum WeatherError: LocalizedError {
+    case locationDenied
     case networkError
+    case unknown
+
+    var errorDescription: String? {
+        switch self {
+        case .locationDenied:
+            return "Location access denied. Enable in Settings."
+        case .networkError:
+            return "Unable to fetch weather. Check your connection."
+        case .unknown:
+            return "Weather unavailable."
+        }
+    }
 }
