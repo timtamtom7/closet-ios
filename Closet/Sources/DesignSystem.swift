@@ -36,6 +36,24 @@ enum ClosetDesign {
         
         static let foreground = primaryText
         static let tint = accent
+
+        // MARK: - Adaptive Colors (Dark Mode Support)
+
+        static func background(for colorScheme: ColorScheme) -> Color {
+            colorScheme == .dark ? Color(hex: "#1C1C1E") : Color(hex: "#FAFAF8")
+        }
+
+        static func surface(for colorScheme: ColorScheme) -> Color {
+            colorScheme == .dark ? Color(hex: "#2C2C2E") : Color(hex: "#FFFFFF")
+        }
+
+        static func primaryText(for colorScheme: ColorScheme) -> Color {
+            colorScheme == .dark ? Color(hex: "#FFFFFF") : Color(hex: "#1C1C1E")
+        }
+
+        static func tertiaryText(for colorScheme: ColorScheme) -> Color {
+            colorScheme == .dark ? Color(hex: "#8E8E93") : Color(hex: "#5A5A5E")
+        }
     }
     
     // MARK: - Typography

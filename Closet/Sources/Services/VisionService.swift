@@ -34,12 +34,13 @@ class VisionService {
             return (.unknown, [], ["uncategorized"])
         }
 
-        // Run analyses in parallel
+        // Run analyses - color and shape in parallel, tags after color
         async let colorResult = extractDominantColors(from: cgImage)
         async let shapeResult = analyzeShape(from: cgImage)
-        async let tagResult = generateTags(from: cgImage, colors: colorResult.dominantHexes)
 
-        let (colors, shapes, tags) = await (colorResult, shapeResult, tagResult)
+        let colors = await colorResult
+        let shapes = await shapeResult
+        let tags = await generateTags(from: cgImage, colors: colors.dominantHexes)
 
         // Classify based on shape + color
         let category = classifyCategory(shape: shapes, colors: colors.dominantHexes)
@@ -327,10 +328,6 @@ class VisionService {
     }
 
     // MARK: - Color Utilities
-
-    private func nameForColor(r: Int, g: Int, b: Int) -> String {
-        return nameForColor(hex: rgbToHex(r: r, g: g, b: b))
-    }
 
     private func nameForColor(hex: String) -> String {
         let r = Int(hex.prefix(2), radix: 16) ?? 0

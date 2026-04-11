@@ -1,8 +1,7 @@
 import SwiftUI
 
-@Environment(\.colorScheme) var colorScheme
-
 struct ClothingItemCard: View {
+    @Environment(\.colorScheme) var colorScheme
     let item: ClothingItem
     let onTap: () -> Void
     let onDelete: () -> Void

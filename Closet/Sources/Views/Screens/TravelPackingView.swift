@@ -310,7 +310,8 @@ struct NewTripSheet: View {
             }
             .onChange(of: destination) { _, _ in
                 Task {
-                    weatherForecast = try? await WeatherService.shared.fetchForecast(days: 5).first
+                    await WeatherService.shared.fetchWeather()
+                    weatherForecast = WeatherService.shared.forecasts.first
                 }
             }
         }

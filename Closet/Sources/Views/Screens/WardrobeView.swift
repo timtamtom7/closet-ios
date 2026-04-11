@@ -1,9 +1,8 @@
 import SwiftUI
-
-@Environment(\.colorScheme) var colorScheme
 import PhotosUI
 
 struct WardrobeView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var viewModel = WardrobeViewModel()
     @State private var cameraPhotoItem: PhotosPickerItem?
     @State private var columns = [
@@ -174,6 +173,7 @@ struct ScaleButtonStyle: ButtonStyle {
 
 struct AddItemSheet: View {
     @Bindable var viewModel: WardrobeViewModel
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -295,6 +295,7 @@ struct AddItemSheet: View {
 }
 
 struct ItemDetailSheet: View {
+    @Environment(\.colorScheme) var colorScheme
     let item: ClothingItem
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss
@@ -441,6 +442,7 @@ struct FlowLayout: Layout {
 }
 
 struct EmptyWardrobeView: View {
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var opacity: Double = 0
 
     var body: some View {

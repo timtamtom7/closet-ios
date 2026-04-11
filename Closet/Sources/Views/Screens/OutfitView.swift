@@ -1,9 +1,8 @@
 import SwiftUI
-
-@Environment(\.colorScheme) var colorScheme
 import UIKit
 
 struct OutfitView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var outfitViewModel = OutfitViewModel()
     @Environment(WardrobeViewModel.self) private var wardrobeViewModel
     @State private var showWhyNotSheet = false
@@ -30,7 +29,7 @@ struct OutfitView: View {
                     if !outfitViewModel.layeringSuggestions.isEmpty {
                         TemperatureLayeringView(
                             suggestions: outfitViewModel.layeringSuggestions,
-                            temperature: outfitViewModel.currentWeather?.temperature ?? 20
+                            temperature: Double(outfitViewModel.currentWeather?.temperature ?? 20)
                         )
                         .padding(.horizontal, 20)
                     }
@@ -397,6 +396,7 @@ struct OutfitView: View {
 }
 
 struct OutfitLogRow: View {
+    @Environment(\.colorScheme) var colorScheme
     let outfit: Outfit
     let items: [ClothingItem]
     let onDelete: () -> Void
@@ -446,6 +446,7 @@ struct OutfitLogRow: View {
 }
 
 struct OutfitThumbnailSmall: View {
+    @Environment(\.colorScheme) var colorScheme
     let item: ClothingItem
     @State private var image: UIImage?
 

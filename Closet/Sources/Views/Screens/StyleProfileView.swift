@@ -1,8 +1,7 @@
 import SwiftUI
 
-@Environment(\.colorScheme) var colorScheme
-
 struct StyleProfileView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var viewModel = StyleProfileViewModel()
     @State private var wardrobeViewModel = WardrobeViewModel()
     @State private var outfitViewModel = OutfitViewModel()
@@ -278,6 +277,7 @@ struct StyleProfileView: View {
 }
 
 struct MoreOptionRow: View {
+    @Environment(\.colorScheme) var colorScheme
     let icon: String
     let title: String
     let subtitle: String

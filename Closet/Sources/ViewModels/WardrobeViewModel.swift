@@ -60,10 +60,10 @@ final class WardrobeViewModel {
                let image = UIImage(data: data) {
                 capturedImage = image
                 let result = try await VisionService.shared.detectClothing(in: image)
-                detectedCategory = result.category
-                detectedColors = result.colors
-                detectedTags = result.tags
-                itemName = result.category.rawValue
+                detectedCategory = result.0
+                detectedColors = result.1
+                detectedTags = result.2
+                itemName = result.0.rawValue
                 showingAddItem = true
             }
         } catch {

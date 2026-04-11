@@ -8,12 +8,12 @@ import CoreLocation
 class WeatherService: NSObject, ObservableObject {
     static let shared = WeatherService()
 
-    @Published var currentWeather: Weather?
+    @Published var currentWeather: WeatherInfo?
     @Published var forecasts: [DayForecast] = []
     @Published var isLoading: Bool = false
     @Published var error: Error?
 
-    private let weatherService = WeatherService.shared
+    private let weatherService = WeatherKit.WeatherService()
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
 
@@ -82,16 +82,16 @@ class WeatherService: NSObject, ObservableObject {
 
     // MARK: - Weather Mapping
 
-    private func mapCurrentWeather(_ weather: Weather) -> Weather {
+    private func mapCurrentWeather(_ weather: Weather) -> WeatherInfo {
         let current = weather.currentWeather
 
-        return Weather(
-            temperature: Int(current.temperature.converted(to: .fahrenheit).value),
+        return WeatherInfo(
             condition: mapCondition(current.condition),
+            temperature: Int(current.temperature.converted(to: .fahrenheit).value),
             icon: mapSystemName(current.condition),
             humidity: Int(current.humidity * 100),
-            windSpeed: Int(current.windSpeed.converted(to: .milesPerHour).value),
-            uvIndex: current UVIndex
+            windSpeed: Int(current.wind.speed.converted(to: .milesPerHour).value),
+            uvIndex: currentUVIndex
         )
     }
 
@@ -122,12 +122,10 @@ class WeatherService: NSObject, ObservableObject {
         case .smoky: return "Smoky"
         case .breezy: return "Breezy"
         case .hot: return "Hot"
-        case .cold: return "Cold"
         case .blowingDust: return "Blowing Dust"
         case .tropicalStorm: return "Tropical Storm"
         case .hurricane: return "Hurricane"
         case .sunShowers: return "Sun Showers"
-        case .hailing: return "Hailing"
         case .blowingSnow: return "Blowing Snow"
         case .freezingDrizzle: return "Freezing Drizzle"
         default: return condition.description
@@ -144,7 +142,6 @@ class WeatherService: NSObject, ObservableObject {
         case .sleet, .freezingRain, .freezingDrizzle: return "cloud.sleet.fill"
         case .windy, .breezy: return "wind"
         case .foggy, .haze, .smoky: return "cloud.fog.fill"
-        case .cold: return "thermometer.snowflake"
         case .hot: return "thermometer.sun.fill"
         case .hurricane, .tropicalStorm: return "tornado"
         default: return "cloud.fill"
@@ -154,9 +151,9 @@ class WeatherService: NSObject, ObservableObject {
     // MARK: - Mock Data (for development without location)
 
     func loadMockData() {
-        currentWeather = Weather(
-            temperature: 72,
+        currentWeather = WeatherInfo(
             condition: "Partly Cloudy",
+            temperature: 72,
             icon: "cloud.sun.fill",
             humidity: 65,
             windSpeed: 8,
@@ -167,6 +164,36 @@ class WeatherService: NSObject, ObservableObject {
             DayForecast(date: Date().addingTimeInterval(86400), high: 70, low: 55, condition: "Cloudy", icon: "cloud.fill"),
             DayForecast(date: Date().addingTimeInterval(86400 * 2), high: 65, low: 52, condition: "Rain", icon: "cloud.rain.fill"),
         ]
+    }
+
+    /// Lightweight weather info for UI display
+    struct WeatherInfo {
+        let condition: String
+        let temperature: Int
+        let icon: String
+        var humidity: Int = 0
+        var windSpeed: Int = 0
+        var uvIndex: Int = 0
+
+        /// Human-readable description of weather
+        var description: String {
+            "\(temperature)° \(condition)"
+        }
+    }
+
+    /// Daily forecast for travel packing
+    struct DayForecast: Identifiable {
+        let id = UUID()
+        let date: Date
+        let high: Int
+        let low: Int
+        let condition: String
+        let icon: String
+
+        /// Average temperature for the day
+        var avgTemp: Int {
+            (high + low) / 2
+        }
     }
 }
 
@@ -193,17 +220,20 @@ extension WeatherService: CLLocationManagerDelegate {
     }
 
     nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        Task { @MainActor in
-            switch manager.authorizationStatus {
-            case .authorizedWhenInUse, .authorizedAlways:
-                manager.requestLocation()
-            case .denied, .restricted:
-                self.error = WeatherError.locationDenied
-                self.loadMockData()  // Load mock when location denied
-                self.isLoading = false
-            default:
-                break
+        let status = manager.authorizationStatus
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            Task { @MainActor [weak self] in
+                self?.locationManager.requestLocation()
             }
+        case .denied, .restricted:
+            Task { @MainActor [weak self] in
+                self?.error = WeatherError.locationDenied
+                self?.loadMockData()
+                self?.isLoading = false
+            }
+        default:
+            break
         }
     }
 }

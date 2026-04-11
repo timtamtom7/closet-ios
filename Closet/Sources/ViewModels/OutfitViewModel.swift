@@ -48,22 +48,19 @@ final class OutfitViewModel {
 
     @MainActor
     func fetchWeather() async {
-        do {
-            currentWeather = try await WeatherService.shared.fetchWeather()
-            await loadLayeringSuggestions()
-        } catch {
-            print("Weather fetch failed: \(error.localizedDescription)")
-            currentWeather = WeatherService.WeatherInfo(condition: "Clear", temperature: 20, icon: "sun.max.fill")
-        }
+        isLoading = true
+        await WeatherService.shared.fetchWeather()
+        // currentWeather is updated via @Published in WeatherService
+        currentWeather = WeatherService.shared.currentWeather
+        isLoading = false
+        await loadLayeringSuggestions()
     }
 
     @MainActor
     func fetchForecast() async {
-        do {
-            forecasts = try await WeatherService.shared.fetchForecast(days: 5)
-        } catch {
-            forecasts = []
-        }
+        // Forecasts are updated via @Published in WeatherService when fetchWeather is called
+        // Just sync from the shared instance
+        forecasts = WeatherService.shared.forecasts
     }
 
     @MainActor
@@ -84,14 +81,17 @@ final class OutfitViewModel {
         }
         layeringSuggestions = await OutfitEvolutionService.shared.generateLayeringSuggestions(
             items: [],
-            temperature: temp
+            temperature: Double(temp)
         )
     }
 
     @MainActor
     func generateOutfits(from items: [ClothingItem]) async {
         let weatherDesc = currentWeather?.condition ?? "Clear"
-        let temp = currentWeather?.temperature
+        var temp: Double? = nil
+        if let temperature = currentWeather?.temperature {
+            temp = Double(temperature)
+        }
 
         suggestedOutfits = await OutfitGeneratorService.shared.generateOutfits(
             from: items,

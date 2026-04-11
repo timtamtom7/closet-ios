@@ -1,9 +1,8 @@
 import SwiftUI
-
-@Environment(\.colorScheme) var colorScheme
 import UIKit
 
 struct OutfitCard: View {
+    @Environment(\.colorScheme) var colorScheme
     let outfit: Outfit
     let items: [ClothingItem]
     let onSave: () -> Void
