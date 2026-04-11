@@ -459,7 +459,7 @@ struct EmptyWardrobeView: View {
         .padding(.horizontal, 40)
         .opacity(opacity)
         .onAppear {
-            withAnimation(.easeOut(duration: 0.3)) {
+            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.3)) {
                 opacity = 1
             }
         }

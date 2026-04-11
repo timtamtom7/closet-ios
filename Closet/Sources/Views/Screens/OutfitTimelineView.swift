@@ -4,6 +4,7 @@ struct OutfitTimelineView: View {
     let outfits: [Outfit]
     let items: [ClothingItem]
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var selectedMonth: Date?
 
     var body: some View {
@@ -19,7 +20,7 @@ struct OutfitTimelineView: View {
                                 items: items,
                                 isExpanded: selectedMonth == group.month,
                                 onToggle: {
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    withAnimation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.7)) {
                                         if selectedMonth == group.month {
                                             selectedMonth = nil
                                         } else {
