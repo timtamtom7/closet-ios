@@ -163,6 +163,7 @@ struct OutfitView: View {
                             }
                         }
                         .buttonStyle(.plain)
+                        .accessibilityLabel("Set event type to \(event.suggestedEventType.rawValue)")
                     }
                     .padding(12)
                     .background(ClosetDesign.Colors.background(for: colorScheme))
