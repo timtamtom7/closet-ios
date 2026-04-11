@@ -114,6 +114,8 @@ struct StyleProfileView: View {
                 .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Monthly Trends")
+            .accessibilityHint("View your monthly style trends and statistics")
 
             Button {
                 showOutfitTimeline = true
@@ -132,6 +134,8 @@ struct StyleProfileView: View {
                 .shadow(color: ClosetDesign.Colors.primaryText.opacity(0.05), radius: 4, x: 0, y: 2)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Outfit Timeline")
+            .accessibilityHint("View your outfit history by date")
         }
         .padding(.horizontal, 20)
     }
@@ -313,5 +317,7 @@ struct MoreOptionRow: View {
             .clipShape(RoundedRectangle(cornerRadius: ClosetDesign.Radius.card))
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(title)
+        .accessibilityHint(subtitle)
     }
 }
